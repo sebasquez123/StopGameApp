@@ -8,5 +8,8 @@ Instalacion:
 2) Extraer el conjunto de archivos en una carpeta nueva
 3) verificar el contenido de imagenes dentro de los archivos estaticos.
 
+<span>![</span><span>imagen del login del aplicativo</span><span>]</span><span>(</span>
+
+<span>https://raw.githubusercontent.com/sebasquez123/StopGameAp/main/login.png</span><span>)</span>
 
 
