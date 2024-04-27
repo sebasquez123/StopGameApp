@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StopGame</title>
+    <!-- <script src="./assets/login.js"></script> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+    <!-- Bulma Version 1-->
+    <link rel="stylesheet" href="https://unpkg.com/bulma@1.0.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../static/css/login.css">
+    <link rel="stylesheet" media="all" href="../../../static/css/degradado.css">  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../../static/css/ranking.css">
+    <link rel="stylesheet" href="../../../static/css/selecciones.css">
+</head>
+
+<body>
+    <section class="is-fullheight">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4" style="margin-top:40px;">
+                    <h3 class="title" style="color: #ffffff;">¿¡ Quien jugara hoy !?</h3>
+                    <hr style="border-bottom: 3px solid rgb(255, 255, 255);">
+                    <p class="subtitle" style="color: rgb(255, 255, 255);">Elige tus datos</p>
+                    <div class="box">
+                        
+                            <div class="field">
+                                <div class="control">
+                                    <input id="nickname" class="input is-large" type="text" style="padding-left:24px;" placeholder="Nombre">
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div style="width: 100%;">
+                                    <div class="contenedor">
+                                        <form action="">
+                                            <div class="selectbox">
+                                                <div class="selecto" id="templs">
+                                                    <div class="contenido-select">
+                                                        <h1 class="titulo">Selecciona tu estilo</h1>         
+                                                    </div>
+                                                </div>  
+                                                <div class="opciones" id="opciones">
+                                                    <div class="contenido-opcion">
+                                                            <a href="#" class="fonts" id="f1"><img src="../../../static/images/fondo0.jpg" alt="">Perros</a>
+                                                            <a href="#" class="fonts" id="f2"><img src="../../../static/images/fondo1.jpg" alt="">Gatos</a>
+                                                            <a href="#" class="fonts" id="f3"><img src="../../../static/images/fondo2.jpg" alt="">+Gatos</a> 
+                                                            <a href="#" class="fonts" id="f4"><img src="../../../static/images/fondo3.jpg" alt="">Noche</a>
+                                                            <a href="#" class="fonts" id="f5"><img src="../../../static/images/fondo5.jpg" alt="">Aurora</a>
+                                                            <a href="#" class="fonts" id="f6"><img src="../../../static/images/fondo6.jpg" alt="">Tarde</a> 
+                                                    </div>                                                                        
+                                                </div>
+                                            </div>
+                                            <div style="padding:10px; margin:15px 0px 30px 0px; background-color: #0e1013;border-radius: 10px;">
+                                                <div id="dificultad">
+                                                <label for="d1">Facil</label>
+                                                <label for="d2">Medio</label>
+                                                <label for="d3">Avanzado</label>
+                                                <input type="radio" style="height: 20px;" name="dificultad1" id="d1" required>
+                                                <input type="radio" style="height: 20px;" name="dificultad2" id="d2" required>
+                                                <input type="radio" style="height: 20px;" name="dificultad3" id="d3" required>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <a href="./views/main.html"><button id="playbtn" class="button is-block is-large is-fullwidth" style="background-color: #ffd500; color:#0e1013; font-weight:bold;">Jugar <i class="fa fa-gamepad" aria-hidden="true"></i></button></a>
+                    </div>
+                    <p id="pie" style="color: aliceblue;">
+                        &nbsp;·&nbsp;<a href="https://github.com/sebasquez123" target="_blank" style="color: aliceblue;">By sebastian vasqz</a> &nbsp;·&nbsp;
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#ranking">Mira el Ranking</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="ranking" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Global Ranking</h5>
+          <i class="fa fa-globe" style="color: rgb(17, 0, 255); font-size:30px;"></i>
+          <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        </div>
+        <div class="modal-body">
+          <p class="itemp">Nombre</p>
+          <p class="itemp">Dificultad</p>
+          <p class="itemf">Tiempo</p>
+        </div>
+        <div class="tables">
+            <table id="tabladeranking">
+                <thead>
+                </thead>
+                <tbody>
+            
+                    {% if gamers %}
+                    {% for gamer in gamers %}
+                    {% if forloop.first %}
+                  <tr class="trhover  inicial shadow-inicial" style="display: flex; flex-direction:row; justify-content:center; ">
+                    <td class="itemp">{{gamer.nickname.username}}</td>
+                    <td class="itemp">{{gamer.dificult}}</td>
+                    <td class="itemp">{{gamer.total_minutos}}</td>
+                  </tr>
+                  {% endif %}
+                  {% if not forloop.first and not forloop.last %}
+                  <tr class="trhover" style="display: flex; flex-direction:row; justify-content:center; ">     
+                    <td class="itemp">{{gamer.nickname.username}}</td>
+                    <td class="itemp">{{gamer.dificult}}</td>
+                    <td class="itemp">{{gamer.total_minutos}}</td>                  
+                  </tr>
+                  {% endif %}
+                  {% if forloop.last %}
+                  <tr class="trhover shadow-final final " style="display:flex; flex-direction:row;justify-content:center;">
+                    <td class="itemp">{{gamer.nickname.username}}</td>
+                    <td class="itemp">{{gamer.dificult}}</td>
+                    <td class="itemp">{{gamer.total_minutos}}</td>
+                  </tr> 
+                  {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+              </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="button is-block is-large" data-bs-dismiss="modal">Seguir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+
+<script>
+
+    {% comment %} setInterval(function(){
+        location.reload();
+    }, 120000); {% endcomment %}
+
+
+    const select = document.getElementById('templs');
+    const opciones = document.getElementById('opciones');
+    const contenedor = document.querySelector('.contenedor');
+    const body = document.querySelector('body');
+    const seccionDestino = document.getElementById('pie');
+    
+    select.addEventListener('click', () => {
+        
+        select.classList.toggle('active');
+        opciones.classList.toggle('active');
+        contenedor.classList.toggle('active');
+        body.classList.toggle('active');
+
+        setTimeout(() => {
+            seccionDestino.scrollIntoView({ behavior: 'smooth' });
+        }, 200);
+    });
+
+    const titulo = document.querySelector('.titulo');
+    var fondo_seleccionado = '';
+
+    fondos = document.querySelectorAll('.fonts');
+    fondos.forEach(fondo => {
+        fondo.addEventListener('click', function() {
+            fondo_seleccionado = fondo.id;
+
+            select.classList.toggle('active');
+            opciones.classList.toggle('active');
+            contenedor.classList.toggle('active');
+            body.classList.toggle('active');
+            titulo.classList.add('active');
+
+
+            if (fondo_seleccionado == 'f1') {
+                titulo.innerHTML = 'Perros';
+                titulo.style.color = 'black';
+                select.style.background = 'url(../../../static/images/fondo0.jpg)';
+                select.style.backgroundSize = 'cover';} 
+
+            else if (fondo_seleccionado == 'f2') {
+                titulo.innerHTML = 'Gatos';
+                titulo.style.color = 'black';
+                select.style.background = 'url(../../../static/images/fondo1.jpg)';
+                select.style.backgroundSize = 'cover';}
+            else if (fondo_seleccionado == 'f3') {
+                titulo.innerHTML = 'Mas Gatos';
+                titulo.style.color = 'black';
+                select.style.background = 'url(../../../static/images/fondo2.jpg)';
+                select.style.backgroundSize = 'cover';
+                }
+            else if (fondo_seleccionado == 'f4') {
+                titulo.innerHTML = 'Noche';
+                titulo.style.color = 'white';
+                select.style.background = 'url(../../../static/images/fondo3.jpg)';
+                select.style.backgroundSize = 'cover';
+                select.style.backgroundPosition = 'center center';}
+            else if (fondo_seleccionado == 'f5') {
+                titulo.innerHTML = 'Aurora boreal';
+                titulo.style.color = 'white';
+                select.style.background = 'url(../../../static/images/fondo5.jpg)';
+                select.style.backgroundSize = 'cover';
+                select.style.backgroundPosition = 'center center';}
+            else if (fondo_seleccionado == 'f6') {
+                titulo.innerHTML = 'Tarde noche';
+                titulo.style.color = 'white';
+                select.style.background = 'url(../../../static/images/fondo6.jpg)';
+                select.style.backgroundSize = 'cover';
+                select.style.backgroundPosition = 'center center';}
+            else{
+
+            }
+            console.log(fondo_seleccionado);
+      
+                
+            
+        });
+    });
+
+
+    const checks = document.querySelectorAll('input[type="radio"]');
+    var dificultad_seleccionada = '';
+
+    checks.forEach(items => {
+        items.addEventListener('click', function() {
+            // Desactivar los otros elementos de radio
+            checks.forEach(otro => {
+                if (otro !== items) {
+                    otro.checked=false;
+                }
+                else{
+                    dificultad_seleccionada = items.id;
+                    console.log(dificultad_seleccionada);
+                }
+            });
+        });
+    });
+
+
+
+const boton_jugar = document.getElementById('playbtn');
+const nickname = document.getElementById('nickname');
+
+boton_jugar.addEventListener('click', (event) => {
+
+    event.preventDefault();
+    
+    if (nickname.value == '') {
+        window.alert('Por favor ingrese un nombre');
+    }
+    else if (dificultad_seleccionada == '') {
+        window.alert('Por favor seleccione una dificultad');
+    }
+    else if (fondo_seleccionado == '') {
+        window.alert('Por favor seleccione un fondo');
+    }
+    else{
+    window.alert("felicidades, tu usuario es: " + nickname.value + " ,tu dificultad es: " + dificultad_seleccionada + " y tu fondo es: " + fondo_seleccionado);
+    }
+});
+
+</script>

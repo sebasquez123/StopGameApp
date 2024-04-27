@@ -1,0 +1,161 @@
+#ranking{
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  
+  
+  #tabladeranking{
+    border-radius: 10px;
+    width: 100%;
+    color: white;
+    vertical-align:middle;
+   background: #212121;
+   overflow-y: auto;
+   scrollbar-width: none;
+  
+  
+    td{
+      width: 150px;
+      padding: 10px;
+    }
+  }
+  
+  
+  html,body {
+   overflow: auto;
+   scrollbar-width: none;
+  }
+  
+  a {
+      text-decoration: none;
+  }
+  
+  .contenedor {
+      width: 100%;
+      max-width: 400px;
+      margin: auto;
+      height: 130px;
+      transition: all .3s;
+  }
+  .contenedor{
+      transition: all .3s ease;
+  }
+  
+  .contenedor.active{
+      height: 400px; 
+      transition: all .3s ease;
+  }
+  
+  
+  
+  .selecto {
+      height: 30px;
+      background: #14161a;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      transition: .2s ease all;
+      padding: 25px;
+      position: relative;
+      z-index: 200;
+      border: 1px solid #b9b9b939;
+  }
+  .selecto::after{
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      width: 10px;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid #cbcbcbc5;
+   
+  }
+  
+  .selecto:hover {
+      border: 1px solid #b7b7b78e;
+  }
+  .selecto:active{
+      border: 1px solid #0f00db8e;
+      box-shadow: 0px 0px 10px #0f00db8e;
+
+  }
+  
+  .titulo {
+      color: #7878789c;
+      font-weight:bolder;
+      font-size: 20px;
+      left: 10px;
+  }
+  .titulo.active {
+      font-weight:bold;
+      font-size: 20px;
+      font-family: cursive;
+  }
+  
+  .opciones {
+      background: #0e1013 ;
+      border-radius: 10px;  
+      max-height: 400px;
+      width: 100%;
+      display: none;
+      opacity: 0;
+      transition: all .3s ease;
+  }
+  
+  .opciones.active {
+      display: block;
+      opacity: 1;
+      animation: fadeIn .5s forwards;
+  }
+  
+  @keyframes fadeIn {
+      from {
+          transform: translateY(-50px) scale(.5);
+      }
+      to {
+          transform: translateY(0) scale(1);
+      }
+  }
+  
+  .contenido-opcion {
+      width: 100%;
+      display: grid;
+      transition: .6s ease all;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+      padding: 30px;
+      
+  }
+  .contenido-opcion a{
+      color: #ffffff;
+  }
+  .contenido-opcion img {
+      width: 60px;
+      height: 60px;
+      border-radius: 20%;
+      
+  }
+  .contenido-opcion img:hover {
+  box-shadow: 0px 0px 10px #695560c0;
+  filter: brightness(130%);
+  }
+  
+  #dificultad{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows:1 ;
+      gap: 10px;
+  }
+  
+  @media screen and (max-width: 800px){
+      .selectbox {
+          width: 100%;
+      }
+  }
