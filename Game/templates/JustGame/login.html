@@ -5,14 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StopGame</title>
-    <!-- <script src="./assets/login.js"></script> -->
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
-    <!-- Bulma Version 1-->
     <link rel="stylesheet" href="https://unpkg.com/bulma@1.0.0/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="../../../static/css/login.css">
     <link rel="stylesheet" media="all" href="../../../static/css/degradado.css">  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../static/css/ranking.css">
     <link rel="stylesheet" href="../../../static/css/selecciones.css">
 </head>
@@ -137,137 +135,13 @@
       </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../../static/js/login.js"></script>
 </body>
 </html>
 
 
-
-
 <script>
 
-    {% comment %} setInterval(function(){
-        location.reload();
-    }, 120000); {% endcomment %}
-
-
-    const select = document.getElementById('templs');
-    const opciones = document.getElementById('opciones');
-    const contenedor = document.querySelector('.contenedor');
-    const body = document.querySelector('body');
-    const seccionDestino = document.getElementById('pie');
-    
-    select.addEventListener('click', () => {
-        
-        select.classList.toggle('active');
-        opciones.classList.toggle('active');
-        contenedor.classList.toggle('active');
-        body.classList.toggle('active');
-
-        setTimeout(() => {
-            seccionDestino.scrollIntoView({ behavior: 'smooth' });
-        }, 200);
-    });
-
-    const titulo = document.querySelector('.titulo');
-    var fondo_seleccionado = '';
-
-    fondos = document.querySelectorAll('.fonts');
-    fondos.forEach(fondo => {
-        fondo.addEventListener('click', function() {
-            fondo_seleccionado = fondo.id;
-
-            select.classList.toggle('active');
-            opciones.classList.toggle('active');
-            contenedor.classList.toggle('active');
-            body.classList.toggle('active');
-            titulo.classList.add('active');
-
-
-            if (fondo_seleccionado == 'f1') {
-                titulo.innerHTML = 'Perros';
-                titulo.style.color = 'black';
-                select.style.background = 'url(../../../static/images/fondo0.jpg)';
-                select.style.backgroundSize = 'cover';} 
-
-            else if (fondo_seleccionado == 'f2') {
-                titulo.innerHTML = 'Gatos';
-                titulo.style.color = 'black';
-                select.style.background = 'url(../../../static/images/fondo1.jpg)';
-                select.style.backgroundSize = 'cover';}
-            else if (fondo_seleccionado == 'f3') {
-                titulo.innerHTML = 'Mas Gatos';
-                titulo.style.color = 'black';
-                select.style.background = 'url(../../../static/images/fondo2.jpg)';
-                select.style.backgroundSize = 'cover';
-                }
-            else if (fondo_seleccionado == 'f4') {
-                titulo.innerHTML = 'Noche';
-                titulo.style.color = 'white';
-                select.style.background = 'url(../../../static/images/fondo3.jpg)';
-                select.style.backgroundSize = 'cover';
-                select.style.backgroundPosition = 'center center';}
-            else if (fondo_seleccionado == 'f5') {
-                titulo.innerHTML = 'Aurora boreal';
-                titulo.style.color = 'white';
-                select.style.background = 'url(../../../static/images/fondo5.jpg)';
-                select.style.backgroundSize = 'cover';
-                select.style.backgroundPosition = 'center center';}
-            else if (fondo_seleccionado == 'f6') {
-                titulo.innerHTML = 'Tarde noche';
-                titulo.style.color = 'white';
-                select.style.background = 'url(../../../static/images/fondo6.jpg)';
-                select.style.backgroundSize = 'cover';
-                select.style.backgroundPosition = 'center center';}
-            else{
-
-            }
-            console.log(fondo_seleccionado);
-      
-                
-            
-        });
-    });
-
-
-    const checks = document.querySelectorAll('input[type="radio"]');
-    var dificultad_seleccionada = '';
-
-    checks.forEach(items => {
-        items.addEventListener('click', function() {
-            // Desactivar los otros elementos de radio
-            checks.forEach(otro => {
-                if (otro !== items) {
-                    otro.checked=false;
-                }
-                else{
-                    dificultad_seleccionada = items.id;
-                    console.log(dificultad_seleccionada);
-                }
-            });
-        });
-    });
-
-
-
-const boton_jugar = document.getElementById('playbtn');
-const nickname = document.getElementById('nickname');
-
-boton_jugar.addEventListener('click', (event) => {
-
-    event.preventDefault();
-    
-    if (nickname.value == '') {
-        window.alert('Por favor ingrese un nombre');
-    }
-    else if (dificultad_seleccionada == '') {
-        window.alert('Por favor seleccione una dificultad');
-    }
-    else if (fondo_seleccionado == '') {
-        window.alert('Por favor seleccione un fondo');
-    }
-    else{
-    window.alert("felicidades, tu usuario es: " + nickname.value + " ,tu dificultad es: " + dificultad_seleccionada + " y tu fondo es: " + fondo_seleccionado);
-    }
-});
 
 </script>
