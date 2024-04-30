@@ -1,8 +1,9 @@
 var  login ={
-    fondo_seleccionado: '',
     dificultad_seleccionada: '',
     nickname: '',
 }
+
+var fondo_seleccionado = '';
 
 //  setInterval(function(){
 //     location.reload();
@@ -30,7 +31,7 @@ const titulo = document.querySelector('.titulo');
 fondos = document.querySelectorAll('.fonts');
 fondos.forEach(fondo => {
     fondo.addEventListener('click', function() {
-        login.fondo_seleccionado = fondo.id;
+        fondo_seleccionado = fondo.id;
 
         select.classList.toggle('active');
         opciones.classList.toggle('active');
@@ -39,36 +40,36 @@ fondos.forEach(fondo => {
         titulo.classList.add('active');
 
 
-        if (login.fondo_seleccionado == 'f1') {
+        if (fondo_seleccionado == 'f1') {
             titulo.innerHTML = 'Perros';
             titulo.style.color = 'black';
             select.style.background = 'url(../../../static/images/fondo0.jpg)';
             select.style.backgroundSize = 'cover';} 
 
-        else if (login.fondo_seleccionado == 'f2') {
+        else if (fondo_seleccionado == 'f2') {
             titulo.innerHTML = 'Gatos';
             titulo.style.color = 'black';
             select.style.background = 'url(../../../static/images/fondo1.jpg)';
             select.style.backgroundSize = 'cover';}
-        else if (login.fondo_seleccionado == 'f3') {
+        else if (fondo_seleccionado == 'f3') {
             titulo.innerHTML = 'Mas Gatos';
             titulo.style.color = 'black';
             select.style.background = 'url(../../../static/images/fondo2.jpg)';
             select.style.backgroundSize = 'cover';
             }
-        else if (login.fondo_seleccionado == 'f4') {
+        else if (fondo_seleccionado == 'f4') {
             titulo.innerHTML = 'Noche';
             titulo.style.color = 'white';
             select.style.background = 'url(../../../static/images/fondo3.jpg)';
             select.style.backgroundSize = 'cover';
             select.style.backgroundPosition = 'center center';}
-        else if (login.fondo_seleccionado == 'f5') {
+        else if (fondo_seleccionado == 'f5') {
             titulo.innerHTML = 'Aurora boreal';
             titulo.style.color = 'white';
             select.style.background = 'url(../../../static/images/fondo5.jpg)';
             select.style.backgroundSize = 'cover';
             select.style.backgroundPosition = 'center center';}
-        else if (login.fondo_seleccionado == 'f6') {
+        else if (fondo_seleccionado == 'f6') {
             titulo.innerHTML = 'Tarde noche';
             titulo.style.color = 'white';
             select.style.background = 'url(../../../static/images/fondo6.jpg)';
@@ -77,7 +78,7 @@ fondos.forEach(fondo => {
         else{
 
         }
-        //  console.log(login.fondo_seleccionado);
+        //  console.log(fondo_seleccionado);
   
             
         
@@ -122,6 +123,6 @@ else if (login.fondo_seleccionado == '') {
 }
 else{
 login.nickname = nickname.value;
-console.log(login);
+enviarDatos();
 }
 });
