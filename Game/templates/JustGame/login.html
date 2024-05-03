@@ -47,10 +47,10 @@
                                                     <div class="contenido-opcion">
                                                             <a href="#" class="fonts" id="f1"><img src="../../../static/images/fondo0.jpg " alt="fondo de perritos">Perros</a>
                                                             <a href="#" class="fonts" id="f2"><img src="../../../static/images/fondo1.jpg" alt="fondo de gatitos">Gatos</a>
-                                                            <a href="#" class="fonts" id="f3"><img src="../../../static/images/fondo2.jpg" alt="fondo de mas gatitos">+Gatos</a> 
-                                                            <a href="#" class="fonts" id="f4"><img src="../../../static/images/fondo3.jpg" alt="fondo de noche estrellada">Noche</a>
-                                                            <a href="#" class="fonts" id="f5"><img src="../../../static/images/fondo4.jpg" alt="fondo de aurora boreal">Aurora</a>
-                                                            <a href="#" class="fonts" id="f6"><img src="../../../static/images/fondo6.jpg" alt="fondo de caida del sol">Tarde</a> 
+                                                            <a href="#" class="fonts" id="f3"><img src="../../../static/images/fondo2.jpg" alt="fondo de arañas">Arañas</a> 
+                                                            <a href="#" class="fonts" id="f4"><img src="../../../static/images/fondo3.jpg" alt="fondo de capivaras">Capis</a>
+                                                            <a href="#" class="fonts" id="f5"><img src="../../../static/images/fondo4.jpg" alt="fondo de nutrias">Nutrias</a>
+                                                            <a href="#" class="fonts" id="f6"><img src="../../../static/images/fondo5.jpg" alt="fondo de camaleones">Camas</a> 
                                                     </div>                                                                        
                                                 </div>
                                             </div>
@@ -84,8 +84,8 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Global Ranking</h5>
-          <i class="fa fa-globe" style="color: rgb(17, 0, 255); font-size:30px;"></i>
+          <h5 class="modal-title" id="staticBackdropLabel">Team Ranking</h5>
+          <i class="fa fa-trophy" style="color: rgb(17, 0, 255); font-size:30px;"></i>
           <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
         <div class="modal-body">
@@ -105,21 +105,21 @@
                   <tr class="trhover  inicial shadow-inicial" style="display: flex; flex-direction:row; justify-content:center; ">
                     <td class="itemp">{{gamer.nickname.username}}</td>
                     <td class="itemp">{{gamer.dificult}}</td>
-                    <td class="itemp">{{gamer.total_minutos}}</td>
+                    <td class="itemp">{{gamer.total_segundos}} s</td>
                   </tr>
                   {% endif %}
                   {% if not forloop.first and not forloop.last %}
                   <tr class="trhover" style="display: flex; flex-direction:row; justify-content:center; ">     
                     <td class="itemp">{{gamer.nickname.username}}</td>
                     <td class="itemp">{{gamer.dificult}}</td>
-                    <td class="itemp">{{gamer.total_minutos}}</td>                  
+                    <td class="itemp">{{gamer.total_segundos}} s</td>                  
                   </tr>
                   {% endif %}
                   {% if forloop.last %}
                   <tr class="trhover shadow-final final " style="display:flex; flex-direction:row;justify-content:center;">
                     <td class="itemp">{{gamer.nickname.username}}</td>
                     <td class="itemp">{{gamer.dificult}}</td>
-                    <td class="itemp">{{gamer.total_minutos}}</td>
+                    <td class="itemp">{{gamer.total_segundos}} s</td>
                   </tr> 
                   {% endif %}
                     {% endfor %}
@@ -133,8 +133,56 @@
       </div>
     </div>
   </div>
+
+  <article id="warning" class="message is-warning hiddenn">
+    <div class="message-header">
+      <p>Ups...</p>
+      <button class="delete" aria-label="delete"></button>
+    </div>
+    <div class="message-body">
+      <p id="advertencia"></p>
+    </div>
+  </article>
+
+
+  
+
+<style>
+
+.message-header{font-size: 25px;}
+  #advertencia{
+    font-weight: bold;
+    font-size: 20px;
+  }
+  #warning{
+    display: none;
+    position: absolute;
+    top: 38%;
+    left: 30%;
+    z-index: 1000;
+    border-radius: 25px;
+    width: 500px;
+    height: 100px;
+  }
+  #warning.active{
+    display: block;
+    animation: subir-bajar 3s infinite;
+  }
+
+  @keyframes subir-bajar {
+  
+    50% {
+      
+      transform: translateY(-20%);
+      
+    }
+    
+  }
+
+</style>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="{% static 'js/login.js'%}"></script>
-  <script src="{% static 'js/solicitudhttpserver.js'%}"></script>
+  <script src="{% static 'js/formularioinicial.js'%}"></script>
+  <script src="{% static 'js/envioformulario.js'%}"></script>
 </body>
 </html>

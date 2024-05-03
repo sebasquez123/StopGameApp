@@ -17,7 +17,13 @@ class Filtrar_datos:
        if cleaned_data != 'd1' and cleaned_data != 'd2' and cleaned_data != 'd3':
            raise ValueError('No existe esa dificultad')
        else:
-           return cleaned_data
+            if cleaned_data == 'd1':
+               cleaned_data = 'facil'
+            elif cleaned_data == 'd2':
+               cleaned_data = 'medio'
+            elif cleaned_data == 'd3':
+               cleaned_data = 'avanzado'  
+            return cleaned_data
    
    
    

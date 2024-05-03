@@ -10,10 +10,10 @@ class gamer(models.Model):
     dificult = models.CharField(max_length=10)
     initial_time = models.DateTimeField(default= None, null=True)
     final_time = models.DateTimeField(default= None, null=True)
-    total_minutos = models.IntegerField(default=0)
+    total_segundos = models.IntegerField(default=0)
     
     class Meta:
-        ordering = ['dificult', 'total_minutos']
+        ordering = ['dificult', 'total_segundos']
     
     def __str__(self):
         return self.nickname.username

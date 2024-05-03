@@ -1,0 +1,88 @@
+body,html{
+    overflow-y: auto; 
+scrollbar-width: none;
+}
+footer{
+    background-color: #110f23;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+nav{
+    background-color: #110f23;
+}
+
+#salir{
+    color: white;
+    text-decoration: none;
+}
+#salir:hover{
+    color: #b7ff00;
+}
+
+#cuerpojuego img{
+   width: 50px;
+   height: 50px;
+   
+}
+
+#logos{
+th{
+    background-color: transparent;
+}
+
+}
+#cuerpojuego {
+th{
+    border-radius: 10px;
+    border:0px;
+}
+td{
+    border-radius: 10px;
+    border:0px;
+}
+}
+#cabecera{
+color:#110f23;
+}
+
+#stop{
+color:#110f23;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size: 60px;
+font-weight:bold;
+}
+
+#stop:hover{
+color:#00ff11;
+}
+
+#stop.active{
+    color: #ffffff;
+}
+#stop.active:hover{
+    color: #ff0000;
+}
+
+.celdas td {background-color: #110f23;
+    color: #fafafa;
+    transition: all 2s ease;}
+.celdas td.active  {
+
+    background-color: #ffffff;
+    color: #000000;
+    transition: all 2s ease;
+
+}
+
+#contenedorprincipal{
+    height: 80%; width:90%; border: 2px solid #f3f2f2; padding:50px; border-radius: 30px; background-color:#ffffff; box-shadow: 0px 0px 10px #00000080;
+    transition: all 2s ease;
+}
+
+#contenedorprincipal.active{
+    background-color: #0a0915;
+    border: 5px solid #0a0915;
+    transition: all 2s ease;
+    
+}

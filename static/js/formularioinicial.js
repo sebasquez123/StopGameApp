@@ -1,6 +1,8 @@
 var  login ={
+
     dificultad_seleccionada: '',
     nickname: '',
+
 }
 
 var fondo_seleccionado = '';
@@ -8,6 +10,8 @@ var fondo_seleccionado = '';
 //  setInterval(function(){
 //     location.reload();
 // }, 120000); 
+
+
 
 const select = document.getElementById('templs');
 const opciones = document.getElementById('opciones');
@@ -32,54 +36,48 @@ fondos = document.querySelectorAll('.fonts');
 fondos.forEach(fondo => {
     fondo.addEventListener('click', function() {
         fondo_seleccionado = fondo.id;
-
         select.classList.toggle('active');
         opciones.classList.toggle('active');
         contenedor.classList.toggle('active');
         body.classList.toggle('active');
         titulo.classList.add('active');
-
-
+        titulo.style.color = 'black';
+        
         if (fondo_seleccionado == 'f1') {
             titulo.innerHTML = 'Perros';
-            titulo.style.color = 'black';
             select.style.background = 'url(../../../static/images/fondo0.jpg)';
-            select.style.backgroundSize = 'cover';} 
-
+            select.style.backgroundSize = 'cover';
+            } 
         else if (fondo_seleccionado == 'f2') {
             titulo.innerHTML = 'Gatos';
-            titulo.style.color = 'black';
             select.style.background = 'url(../../../static/images/fondo1.jpg)';
-            select.style.backgroundSize = 'cover';}
+            select.style.backgroundSize = 'cover';
+            }
         else if (fondo_seleccionado == 'f3') {
-            titulo.innerHTML = 'Mas Gatos';
-            titulo.style.color = 'black';
+            titulo.innerHTML = 'Arañas';
             select.style.background = 'url(../../../static/images/fondo2.jpg)';
             select.style.backgroundSize = 'cover';
             }
         else if (fondo_seleccionado == 'f4') {
-            titulo.innerHTML = 'Noche';
-            titulo.style.color = 'white';
+            titulo.innerHTML = 'Capis';
             select.style.background = 'url(../../../static/images/fondo3.jpg)';
             select.style.backgroundSize = 'cover';
-            select.style.backgroundPosition = 'center center';}
+            }
         else if (fondo_seleccionado == 'f5') {
-            titulo.innerHTML = 'Aurora boreal';
+            titulo.innerHTML = 'Nutrias';
+            select.style.background = 'url(../../../static/images/fondo4.jpg)';
+            select.style.backgroundSize = 'cover';
+            }
+        else if (fondo_seleccionado == 'f6') {
+            titulo.innerHTML = 'Camas';
             titulo.style.color = 'white';
             select.style.background = 'url(../../../static/images/fondo5.jpg)';
             select.style.backgroundSize = 'cover';
-            select.style.backgroundPosition = 'center center';}
-        else if (fondo_seleccionado == 'f6') {
-            titulo.innerHTML = 'Tarde noche';
-            titulo.style.color = 'white';
-            select.style.background = 'url(../../../static/images/fondo6.jpg)';
-            select.style.backgroundSize = 'cover';
-            select.style.backgroundPosition = 'center center';}
+            }
         else{
-
+            
         }
-        //  console.log(fondo_seleccionado);
-  
+        
             
         
     });
@@ -108,18 +106,29 @@ checks.forEach(items => {
 const boton_jugar = document.getElementById('playbtn');
 const nickname = document.getElementById('nickname');
 
+
+document.querySelector('.delete').addEventListener('click', () => {
+    document.getElementById('warning').classList.remove('active');
+});
+
+
 boton_jugar.addEventListener('click', (event) => {
 
 event.preventDefault();
 
 if (nickname.value == '') {
-    window.alert('Por favor ingrese un nombre');
+    document.getElementById('warning').classList.add('active');
+    document.getElementById('advertencia').innerHTML = 'Ingresa tu mejor <strong style="color:white;">apodo</strong> para continuar...';
 }
 else if (login.dificultad_seleccionada == '') {
-    window.alert('Por favor seleccione una dificultad');
+    console.log('si sirve')
+    document.getElementById('warning').classList.add('active');
+    document.getElementById('advertencia').innerHTML = 'Selecciona una <strong style="color:white;">dificultad</strong> para continuar...';
 }
-else if (login.fondo_seleccionado == '') {
-    window.alert('Por favor seleccione un fondo');
+else if (fondo_seleccionado == '') {
+    document.getElementById('warning').classList.add('active');
+    document.getElementById('advertencia').innerHTML = 'Selecciona un estilo de <strong style="color:white;">fondo</strong> para continuar...';
+    
 }
 else{
 login.nickname = nickname.value;
