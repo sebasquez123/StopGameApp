@@ -11,6 +11,7 @@ class gamer(models.Model):
     initial_time = models.DateTimeField(default= None, null=True)
     final_time = models.DateTimeField(default= None, null=True)
     total_segundos = models.IntegerField(default=0)
+    score = models.IntegerField(default=0)
     
     class Meta:
         ordering = ['dificult', 'total_segundos']

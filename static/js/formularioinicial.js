@@ -1,18 +1,12 @@
 var  login ={
-
     dificultad_seleccionada: '',
     nickname: '',
-
 }
-
 var fondo_seleccionado = '';
 
-//  setInterval(function(){
-//     location.reload();
-// }, 120000); 
 
-
-
+//de aqui en adelante, se realiza la manipulacion del DOM para desplegar elementos del formulario inicial
+//por medio de clases css
 const select = document.getElementById('templs');
 const opciones = document.getElementById('opciones');
 const contenedor = document.querySelector('.contenedor');
@@ -31,6 +25,8 @@ select.addEventListener('click', () => {
     }, 200);
 });
 
+//se revisan todos los elementos de la clase fonts, para asignarles un evento de click
+//y se asigna el id del elemento a la variable encargaad
 const titulo = document.querySelector('.titulo');
 fondos = document.querySelectorAll('.fonts');
 fondos.forEach(fondo => {
@@ -83,7 +79,8 @@ fondos.forEach(fondo => {
     });
 });
 
-
+//lo mismo sucede cuando se selecciona una dificultad, se asigna el id del elemento seleccionado a la variable
+//encargada, y se realiza un algoritmo simple para desactivar los elementos alternativos
 const checks = document.querySelectorAll('input[type="radio"]');
 
 checks.forEach(items => {
@@ -95,14 +92,14 @@ checks.forEach(items => {
             }
             else{
                 login.dificultad_seleccionada = items.id;
-                // console.log(login.dificultad_seleccionada);
             }
         });
     });
 });
 
 
-
+//se evalua el boton jugar, y se verifica que los campos esten llenos, de lo contrario se despliega un mensaje 
+//de advertencia, un elemento de la clase warning, que se encuentra oculto en el html
 const boton_jugar = document.getElementById('playbtn');
 const nickname = document.getElementById('nickname');
 
@@ -131,6 +128,8 @@ else if (fondo_seleccionado == '') {
     
 }
 else{
+//cuando todo es correcto, se envia el objeto con el nombre, la dificultad y el fondo seleccionado por medio 
+//de una solicitud http
 login.nickname = nickname.value;
 enviarDatos();
 }

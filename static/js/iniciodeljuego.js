@@ -1,8 +1,8 @@
 
           
     
-           // se obtienen datos de inicio de sesion guardadas en el sessionStorage de forma temporal, mientras
-                // la partida se desarrolla. se cambia el fondo y se muestra el nombre y la dificultad del jugador
+           //se recuperan los datos guardados en el sessionStorage para mostrarlos en la vista del juego
+           //se muestra el nombre, la dificultad y el fondo seleccionado
                 const nombretext= document.getElementById("nombre");
                 const FondoDelCuerpo = document.querySelector("body");
                 var identidad =sessionStorage.getItem("id");
@@ -22,7 +22,10 @@
 
 
 
-          //se controla el evento del boton de jugar añadiendo estilos intuitivos
+
+            //cuando el usuario preciona el boton de jugar, se realizan un par de efectos visuales y se 
+            //alterna la variable que determina el comienzo y el final de la partida para poder determinar cuando 
+            //cronometrar
             const stoptext = document.getElementById("stopplay");
             const stopbtn= document.getElementById("stop");
             const contenedor = document.getElementById("contenedorprincipal");
@@ -36,12 +39,12 @@
             play =!play;
             Empezar_A_Jugar(play);  
             });
-            // se da estilo a las celdas, se alterna la variable que determina el comienzo y el final de la partida
-            // y se ingresa a la funcion de cronometrar, realiza una solicitud fetch para el envio del estado
-            //de la partida
+
             function Empezar_A_Jugar(condicion)
             {
-                if (condicion)
+
+                // si la condicion es verdadera, se guarda en el sessionStorage y se redirige a la funcion de cronometrar
+                if (condicion) 
                 {
                     console.log("el juego comenzo");
                     stopbtn.classList.add("active");

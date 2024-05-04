@@ -1,4 +1,10 @@
 
+            
+            //la funcion cronometrar es una solicitud http realizada por otro fetch para enviar 
+            //el estado actual del juego al servidor, el mismo comparara el tiempo de inicio con el tiempo final
+            //dependiendo del estado de la variable. dicha diferencia se actualizara en la base de datos 
+            // y se regresara por medio de un response, el cual se almacenara en el sessionStorage y se llamara cuando
+            // se necesite mostrar al cliente.
             function cronometrar(estadodejuego)
             {
                 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
@@ -24,14 +30,20 @@
                   })
                   .then (data => {
                       console.log(data);
+                      // cuando el mensaje del servidor es "empezar", se ingresa a la funcion de iniciarCronometro
                       if(data.mensaje == 'empezar')
                       {
                         console.log("empezando a cronometrar...")  
                         iniciarCronometro();
                       }
+                      // cuando el mensaje del servidor es "terminar", se detiene el cronometro
+                      // y se ingresa a la funcion desplegarPuntaje
                       else if(data.mensaje == 'terminar'){
                         console.log("terminando de cronometrar...")
+                        
+                        sessionStorage.setItem("tiempo_total",data.tiempo);
                         detenerCronometro();
+                        desplegarPuntaje();
                       }
                       else{
                         console.log("no se pudo empezar a cronometrar, revisa el servidor")
@@ -43,6 +55,10 @@
                   })
 
             }
+
+            //la funcion iniciar cronometro, solo es una representacion visual del tiempo que esta pasando en el juego
+            // es una ayuda al usuario, mas no determina el tiempo total de la partida
+
             function iniciarCronometro()
             {
               document.getElementById("tiempo").innerHTML = "00:00:00";

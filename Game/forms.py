@@ -3,6 +3,9 @@
 # from django.contrib.auth.models import User
 
 
+#la clase Filtrar_datos se encarga de limpiar los datos que se reciben del front-end, aunque este archivo
+#esta creado para menejar formularios, se esta utilizando para verificar datos aunque no sean de un formulario
+#se esta definiendo el metodo como estatico
 class Filtrar_datos:
    @staticmethod
    def nickname(user_name):
@@ -25,7 +28,8 @@ class Filtrar_datos:
                cleaned_data = 'avanzado'  
             return cleaned_data
    
-   
+   #en el apartado anterior, el algoritmo verifica si los datos ingresados son validos, los transforma y devuelve un dato limpio
+   #en caso de que no sea valido, se lanza una excepcion con un mensaje de error
    
     
 

@@ -6,8 +6,6 @@ from django.contrib.auth.models import User #importo el modelo de usuario autent
 import json
 from datetime import datetime
 
-# Create your views here.
-
 
 def juego(request):
     
@@ -27,8 +25,11 @@ def juego(request):
             print("el juego termino:",estado)
             tiempo_final = datetime.now()
             print('tiempo final:',tiempo_final)
-            gamer.objects.filter(nickname__username=nick).update(final_time=tiempo_final) 
-            mensaje = {'mensaje':'terminar'}      
+            gamer.objects.filter(nickname__username=nick).update(final_time=tiempo_final)
+            actualizar_ranking() 
+            usuario_jugador = gamer.objects.get(nickname__username=nick)
+            tiempo = usuario_jugador.total_segundos
+            mensaje = {'mensaje':'terminar','tiempo':tiempo}      
         else:
             mensaje = {'mensaje':'error'}
             
@@ -40,27 +41,33 @@ def juego(request):
 
 
 
-
+#Comienza el programa a correr a partir de la vista de login
 def login(request):
     
+    #se llaman las clases de los objetos gamer y usuario para poder consultar en ellos
     gamers= gamer.objects.all()
     usuarios = User.objects.all()
     
+    # si se recibe un metodo post...
     if request.method == 'POST':
         
-        # data = request.POST # para obtener datos de un formulario
+      
         usuario_existente = False   
         data = json.loads(request.body)
         
+        #se crea una instancia de la clase que limpia los datos, esta clase esta ubicada en forms.py
         user_name = data.get ('nickname')
         dificultad = data.get ('dificultad_seleccionada')
         limpieza_de_datos = Filtrar_datos()
         
+        # se procede a llamar los metodos de la clase dentro de un try-except para manejar los errores
         try:
             nick =  str(limpieza_de_datos.nickname(user_name))
             dificult =  limpieza_de_datos.dificultad(dificultad)
             print (nick, dificult,' datos proporcionados correctamente')
             
+            #una vez se tienen los datos limpios, se procede a verificar si el usuario ya existe por medio de un
+            #for loop que recorre los usuarios existentes y retorna un booleano
             for existentes in usuarios:
                 jugadores_existentes = str(existentes.username)
                 print ('nuevo:',nick,'viejo:', jugadores_existentes)
@@ -70,14 +77,20 @@ def login(request):
                 else: 
                     pass
 
+
+                #si el usuario existe, se actualiza su informacion en la base de datos
             if usuario_existente == True:
-                mensaje = {'mensaje':'Usuario ya existe'}
+
                 print('usuario ya existe')
+                gamer.objects.filter(nickname__username=nick).update(dificult=dificult) 
+                mensaje = {'redireccion':'/jugar','dificultad':dificult,'nick':nick}
                 return JsonResponse(mensaje)
             else:
-                #creo un nuevo usuario autenticado solo con el user name y un password por defecto  
+                #si el usuario no existe
+                #se crea un nuevo usuario autenticado solo con el user name y un password por defecto  
                 #cuando se crea, se redirecciona a la pagina de juego y se envia el nombre de usuario 
                 #para gestionar el tiempo de juego y la dificultad seleccionada
+                #los datos de redireccion, nombre y dificultad se envian como response al fetch
                 update_user = User.objects.create_user(username=nick, password='Default1234')
                 update_user.save()   
                 update_jugador = gamer(nickname=update_user, dificult=dificult)
@@ -98,9 +111,11 @@ def login(request):
     else:
         pass
     
-    actualizar_ranking()
+    
     context = {'gamers': gamers}
     return render(request, 'JustGame/login.html', context)
+
+
 
 
 def actualizar_ranking():
