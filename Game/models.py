@@ -8,8 +8,6 @@ class gamer(models.Model):
     id= models.AutoField(primary_key=True)
     nickname = models.OneToOneField(User, on_delete=models.CASCADE)
     dificult = models.CharField(max_length=10)
-    initial_time = models.DateTimeField(default= None, null=True)
-    final_time = models.DateTimeField(default= None, null=True)
     total_segundos = models.IntegerField(default=0)
     score = models.IntegerField(default=0)
     
@@ -72,3 +70,13 @@ class animal(models.Model):
     
     def __str__(self):
         return  self.animal
+
+# class palabra: 
+#     def __init__(self,nombre,apellido,ciudad,color,fruta,cosa,animal):
+#         self.nombre = nombre
+#         self.apellido = apellido
+#         self.ciudad = ciudad
+#         self.color = color
+#         self.fruta = fruta
+#         self.cosa = cosa
+#         self.animal = animal

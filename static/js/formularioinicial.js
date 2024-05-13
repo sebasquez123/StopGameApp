@@ -134,3 +134,7 @@ login.nickname = nickname.value;
 enviarDatos();
 }
 });
+
+window.addEventListener('load', function () {
+    sessionStorage.clear();
+});

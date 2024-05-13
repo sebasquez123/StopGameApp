@@ -1,0 +1,218 @@
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+
+
+#divlet{
+  position:relative;
+  font-size: 1px;
+  color: #ffffff;
+  z-index: 1057;
+  top: 14%;
+  font-weight: bold;
+  transition: font-size 2s ease-in-out;
+}
+#divlet.active{
+  font-size: 150px;
+  text-shadow: #73ff00 0px 0px 20px, #fff200 0px 0px 25px;
+}
+
+#libro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.book-wrapper {
+  width: 150px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+.book {
+  width: 100%;
+  height: auto;
+
+  
+}
+.book-wrapper .book-page {
+  width: 50%;
+  height: auto;
+  position: absolute;
+  animation: paging var(--pag,0.15s) linear infinite;
+  transform-origin: left;
+}
+@keyframes paging {
+  0% {
+    transform: rotateY(0deg) skewY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg) skewY(-20deg);
+  }
+  100% {
+    transform: rotateY(180deg) skewY(0deg);
+  }
+}
+
+
+
+#loading {
+  position: relative;
+  font-size: 2rem;
+  font-family: sans-serif;
+  font-variant: small-caps;
+  font-weight: 900;
+  background: conic-gradient(
+    #a2ffe3 0 25%,
+    #49c8ff 25% 50%,
+    #f7e5ff 50% 75%,
+    #00ff62 75%
+  );
+  background-size: 200% 200%;
+  animation: animateBackground 4.5s ease-in-out infinite;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: opacity 1s ease-in-out;
+}
+
+@keyframes animateBackground {
+  25% {
+    background-position: 0 100%;
+  }
+
+  50% {
+    background-position: 100% 100%;
+  }
+
+  75% {
+    background-position: 100% 0%;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+
+
+
+
+.capa{
+position: absolute;
+height: 100%;
+width: 100%;
+top: 0;
+background-color: rgba(0, 0, 0, 0.703); 
+z-index: 1055;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}	
+
+#stop{ 
+    transition:  opacity .5s linear,transform 2s linear;
+}
+.unclickeable{
+    pointer-events: none;
+    cursor: not-allowed;
+}
+.desplacebtn{
+  transform: translateX(-500px);
+}
+#stopplay {
+  font-weight:bold;
+  color: hsla(0, 0%, 0%, .9);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 350%;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  top: 5%;
+  left: 0%;
+  width: auto;
+  animation: move linear 2000ms infinite;  
+  transition: transform 1s ease-in-out;
+  --color1: #5900ff;
+  --color2: #ff006a;
+
+}
+
+#stopplay:hover{
+    --color1: #ffbf00;
+    --color2: #73ff00;    
+}
+  
+#stopplay.active{
+  --color1: #00ff08;
+  --color2: #6600ff; 
+}
+#stopplay.active:hover{
+  --color1: #ff0000;
+  --color2: #eeffb4; 
+}
+
+@keyframes move {
+  0% {
+    text-shadow:
+      4px -4px 0 var(--color1), 
+      3px -3px 0 var(--color1), 
+      2px -2px 0 var(--color1), 
+      1px -1px 0 var(--color1),
+      -4px 4px 0 var(--color2), 
+      -3px 3px 0 var(--color2), 
+      -2px 2px 0 var(--color2), 
+      -1px 1px 0 var(--color2)
+    ;
+  }
+  25% {    
+    text-shadow:      
+      -4px -4px 0 var(--color2), 
+      -3px -3px 0 var(--color2), 
+      -2px -2px 0 var(--color2), 
+      -1px -1px 0 var(--color2),
+       4px  4px 0 var(--color1), 
+       3px  3px 0 var(--color1), 
+       2px  2px 0 var(--color1), 
+       1px  1px 0 var(--color1)      
+    ;
+  }
+  50% {
+    text-shadow:
+        -4px 4px 0 var(--color1), 
+        -3px 3px 0 var(--color1), 
+        -2px 2px 0 var(--color1), 
+        -1px 1px 0 var(--color1),
+        4px -4px 0 var(--color2), 
+        3px -3px 0 var(--color2), 
+        2px -2px 0 var(--color2), 
+        1px -1px 0 var(--color2)
+    ;
+  }
+  75% {
+    text-shadow:
+     4px  4px 0 var(--color2), 
+     3px  3px 0 var(--color2), 
+     2px  2px 0 var(--color2), 
+     1px  1px 0 var(--color2),
+    -4px -4px 0 var(--color1), 
+    -3px -3px 0 var(--color1), 
+    -2px -2px 0 var(--color1), 
+    -1px -1px 0 var(--color1)      
+    ;
+  }
+  100% {
+    text-shadow:
+    4px -4px 0 var(--color1), 
+    3px -3px 0 var(--color1), 
+    2px -2px 0 var(--color1), 
+    1px -1px 0 var(--color1),
+    -4px 4px 0 var(--color2), 
+    -3px 3px 0 var(--color2), 
+    -2px 2px 0 var(--color2), 
+    -1px 1px 0 var(--color2)
+    ;
+  }  
+}

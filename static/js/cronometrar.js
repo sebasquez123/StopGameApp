@@ -8,8 +8,8 @@
             function cronometrar(estadodejuego)
             {
                 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-                console.log("el estado de juego es: ",estadodejuego)
-
+              
+                  console.log(fila_letra);
 
                   fetch('/jugar/',{
                     method:'POST',
@@ -17,7 +17,8 @@
                         'Content-Type': 'application/json',
                         'X-CSRFToken': csrftoken
                     },
-                    body:JSON.stringify({'estado': estadodejuego,'nick': nombre})
+                    body: JSON.stringify({ 'estado': estadodejuego, 'nick': nombre , 'contador': contador, 'trama': trama_de_palabras,'letra': fila_letra})
+                    //tengo que enviarle, cada trama de palabras y ademas el contador 
                   })
                   .then(response => {
                     if(response.ok){
@@ -40,8 +41,9 @@
                       // y se ingresa a la funcion desplegarPuntaje
                       else if(data.mensaje == 'terminar'){
                         console.log("terminando de cronometrar...")
-                        
-                        sessionStorage.setItem("tiempo_total",data.tiempo);
+                        sessionStorage.setItem("tiempo_total", data.tiempo);
+                        sessionStorage.setItem("score", data.score);
+                        sessionStorage.setItem("fila_puntaje", data.puntaje_item);
                         detenerCronometro();
                         desplegarPuntaje();
                       }
@@ -55,6 +57,7 @@
                   })
 
             }
+
 
             //la funcion iniciar cronometro, solo es una representacion visual del tiempo que esta pasando en el juego
             // es una ayuda al usuario, mas no determina el tiempo total de la partida

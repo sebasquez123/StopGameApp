@@ -39,7 +39,6 @@ function enviarDatos()
             console.log('recibiendo datos completos:'+' '+ data.dificultad +' '+ data.nick);
             location.href = data.redireccion;
 
-            sessionStorage.setItem('id', data.id);
             sessionStorage.setItem('dificultad', data.dificultad);
             sessionStorage.setItem('nick', data.nick);
             sessionStorage.setItem('urlf', fondo_seleccionado);

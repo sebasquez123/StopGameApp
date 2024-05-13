@@ -3,6 +3,7 @@
 
 <!DOCTYPE html>
 <html lang="es">
+ 
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,6 +16,7 @@
         <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/ranking.css'%}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/juego.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/playbutton.css'%}">
     </head>
     
     <body>
@@ -33,21 +35,27 @@
             </div>
         </nav>
         <main>
-            <div  id="contenedorprincipal">
+
+          
+          
+
+          
+
+            <div id="contenedorprincipal">
               <div>
                 <div><a id="stop" class="navbar-brand" href="#"><p id="stopplay">PLAY</p></a></div>
                 <table id="cuerpojuego" class="table table-dark">
                     <thead>
                       <tr id="logos">
-                        <th style="width: 140px;"><img src="{% static 'images/numero.png'%}" alt="numeral"></th>
-                        <th style="width: 100px;"><img src="{% static 'images/nombre.png'%}" alt="nombre"></th>
-                        <th style="width: 150px;"><img src="{% static 'images/apellido.png'%}" alt="apellido"></th>
-                        <th style="width: 100px;"><img src="{% static 'images/ciudad.png'%}" alt="ciudad"></th>
-                        <th style="width: 110px;"><img src="{% static 'images/color.png'%}" alt="color"></th>
-                        <th style="width: 75px;"><img src="{% static 'images/fruta.png'%}" alt="fruta"></th>
-                        <th style="width: 150px;"><img src="{% static 'images/cosa.png'%}" alt="cosa"></th>
-                        <th style="width: 85px;"><img src="{% static 'images/animal.png'%}" alt="animal"></th>
-                        <th style="width: 130px;"><img src="{% static 'images/puntaje.png'%}" alt="puntaje"></th>
+                        <th><img src="{% static 'images/numero.png'%}" alt="numeral"></th>
+                        <th><img src="{% static 'images/nombre.png'%}" alt="nombre"></th>
+                        <th><img src="{% static 'images/apellido.png'%}" alt="apellido"></th>
+                        <th><img src="{% static 'images/ciudad.png'%}" alt="ciudad"></th>
+                        <th><img src="{% static 'images/color.png'%}" alt="color"></th>
+                        <th><img src="{% static 'images/fruta.png'%}" alt="fruta"></th>
+                        <th><img src="{% static 'images/cosa.png'%}" alt="cosa"></th>
+                        <th><img src="{% static 'images/animal.png'%}" alt="animal"></th>
+                        <th><img src="{% static 'images/puntaje.png'%}" alt="puntaje"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -62,27 +70,38 @@
                             <td style="background: linear-gradient(45deg, #00ff11, #3cff00);">Animal</td>
                             <td style="background: linear-gradient(45deg, #3cff00, #c3ff00);">Puntaje</td>
                         </tr>
-                        <tr class="celdas">
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
+                        <tr id="fila1" class="celdas">
+                            <td class="random_num"></td>
+                            <td><input type="text" name="nombre" maxlength="10"></td>
+                            <td><input type="text" name="apellido" maxlength="10"></td>
+                            <td><input type="text" name="ciudad" maxlength="10"></td>
+                            <td><input type="text" name="color" maxlength="10"></td>
+                            <td><input type="text" name="fruta" maxlength="10"></td>
+                            <td><input type="text" name="cosa" maxlength="10"></td>
+                            <td><input type="text" name="animal" maxlength="10"></td>
+                            <td class="puntaje"><p></p></td>
                           </tr>
-                          <tr class="celdas">                  
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
+                          <tr id="fila2" class="celdas">                  
+                            <td class="random_num"></td>
+                            <td><input type="text" name="nombre" maxlength="10"></td>
+                            <td><input type="text" name="apellido" maxlength="10"></td>
+                            <td><input type="text" name="ciudad" maxlength="10"></td>
+                            <td><input type="text" name="color" maxlength="10"></td>
+                            <td><input type="text" name="fruta" maxlength="10"></td>
+                            <td><input type="text" name="cosa" maxlength="10"></td>
+                            <td><input type="text" name="animal" maxlength="10"></td>
+                            <td class="puntaje"><p></p></td>
+                          </tr>
+                          <tr id="fila3" class="celdas">                  
+                            <td class="random_num"></td>
+                            <td><input type="text" name="nombre" maxlength="10"></td>
+                            <td><input type="text" name="apellido" maxlength="10"></td>
+                            <td><input type="text" name="ciudad" maxlength="10"></td>
+                            <td><input type="text" name="color" maxlength="10"></td>
+                            <td><input type="text" name="fruta" maxlength="10"></td>
+                            <td><input type="text" name="cosa" maxlength="10"></td>
+                            <td><input type="text" name="animal" maxlength="10"></td>
+                            <td class="puntaje"><p></p></td>
                           </tr>
                     </tbody>
                   </table>
@@ -92,6 +111,8 @@
         <footer>
             <div class="container px-4 pt-3"><p> &copy; Made by <small><em>Sebastian Vasquez G -</em></small> 03/2024</p></div>
         </footer>
+
+
 
         <!-- Modal para mostrar la informacion del juego -->
         <div class="modal fade" id="informacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false" >
@@ -171,19 +192,106 @@
                     </div>    
                 </div>
                 <div class="modal-footer">
-                  <button id="againbtn" type="button" class="btn btn-warnings" data-bs-dismiss="modal">Jugar otra vez</button>
+                  <button id="againbtn" type="button" class="btn btn-warning" data-bs-dismiss="modal">Jugar otra vez</button>
                   <button id="leftbtn" type="button" class="btn btn-light" data-bs-dismiss="modal">Salir</button>
                 </div>
               </div>
             </div>
           </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <script src="{% static 'js/iniciodeljuego.js'%}"></script>
-        <script src="{% static 'js/cronometrar.js'%}"></script>
-        <script src="{% static 'js/resultados_modal.js'%}"></script>
+        
     </body>
+    <div id="telon">
+      <div id="divlet">LALETRA</div>
+      <div id="libro" >
+        <div class="book-wrapper">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="white"
+            viewBox="0 0 126 75"
+            class="book"
+          >
+            <rect
+              stroke-width="5"
+              stroke="#5ed100"
+              rx="7.5"
+              height="70"
+              width="121"
+              y="2.5"
+              x="2.5"
+            ></rect>
+            <line
+              stroke-width="5"
+              stroke="#5ed100"
+              y2="75"
+              x2="63.5"
+              x1="63.5"
+            ></line>
+            <path
+              stroke-linecap="round"
+              stroke-width="4"
+              stroke="#c18949"
+              d="M25 20H50"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-width="4"
+              stroke="#c18949"
+              d="M101 20H76"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-width="4"
+              stroke="#c18949"
+              d="M16 30L50 30"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-width="4"
+              stroke="#c18949"
+              d="M110 30L76 30"
+            ></path>
+          </svg>
+      
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="#ffffff74"
+            viewBox="0 0 65 75"
+            class="book-page"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-width="4"
+              stroke="#c18949"
+              d="M40 20H15"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-width="4"
+              stroke="#5ed100"
+              d="M49 30L15 30"
+            ></path>
+            <path
+              stroke-width="5"
+              stroke="#5ed100"
+              d="M2.5 2.5H55C59.1421 2.5 62.5 5.85786 62.5 10V65C62.5 69.1421 59.1421 72.5 55 72.5H2.5V2.5Z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+
+      <div id="loading">
+      </div>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <script src="{% static 'js/iniciodeljuego.js'%}"></script>
+  <script src="{% static 'js/cronometrar.js'%}"></script>
+  <script src="{% static 'js/resultados_modal.js'%}"></script>
+  <script src="{% static 'js/tramas_de_datos.js'%}"></script>
+
 </html>
 
-    
