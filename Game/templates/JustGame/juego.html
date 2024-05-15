@@ -17,10 +17,11 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/ranking.css'%}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/juego.css'%}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/playbutton.css'%}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/modal_salida.css'%}">
     </head>
     
     <body>
-        <nav class="navbar navbar-expand-lg" id="mainNav">
+        <nav class="navbar navbar-expand-lg" style="position:absolute; width:100%; margin-bottom:100px;" id="mainNav">
             <div class="subnav1">
                 <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                 <input id="infibtn" type="hidden" data-bs-toggle="modal" data-bs-target="#informacion">
@@ -35,15 +36,9 @@
             </div>
         </nav>
         <main>
-
-          
-          
-
-          
-
             <div id="contenedorprincipal">
               <div>
-                <div><a id="stop" class="navbar-brand" href="#"><p id="stopplay">PLAY</p></a></div>
+                <div><button id="stop" class="navbar-brand"><p id="stopplay">PLAY</p></button></div>
                 <table id="cuerpojuego" class="table table-dark">
                     <thead>
                       <tr id="logos">
@@ -63,7 +58,7 @@
                             <td style="background: linear-gradient(45deg, #00ddff, #00ffea);">#</td>
                             <td style="background: linear-gradient(45deg, #00ffea, #00ffd5);">Nombre</td>
                             <td style="background: linear-gradient(45deg, #00ffd5, #00ffaa);">Apellido</td>
-                            <td style="background: linear-gradient(45deg, #00ffaa, #00ff84);">Ciudad</td>
+                            <td style="background: linear-gradient(45deg, #00ffaa, #00ff84);">Pais</td>
                             <td style="background: linear-gradient(45deg, #00ff84, #00ff5e);">Color</td>
                             <td style="background: linear-gradient(45deg, #00ff5e, #00ff3c);">Fruta</td>
                             <td style="background: linear-gradient(45deg, #00ff3c, #00ff11);">Cosa</td>
@@ -170,24 +165,62 @@
                     <div class="contenido-inf2">
                         <div class="steps2">
                             <div class="dificultad_modal_seccion">
-                                TU DIFICULTAD 
+                                DIFICULTAD 
                                 <div class="box"><p id="dificult_board"></p></div>
                                 
                             </div>
                             <div class="tiempo_modal_seccion">
-                                TIEMPO TOTAL
+                                TIEMPO
                                 
                                 <div class="box"><p id="time_board"></p></div>
                             </div>
                             <div class="puntos_modal_seccion">
-                                PUNTAJE TOTAL
+                                MEJOR PUNTAJE
                                 
-                                <div class="box"><p id="score_board">25P</p></div>
+                                <div class="box"><p id="score_board"></p></div>
                             </div>
                         </div>
                         <div class="ganaste_modal_seccion2">
-                            <p id="fin">GANASTE!!</p>
-                            <img id="ganador" src="{% static 'images/victoria.gif'%}" alt="trofeo y aleluya">
+                          <h3>RESUMEN</h3>
+                                  <div class="encabezado">
+                                    <p class="itemp">Nombre</p>
+                                    <p class="itemp">Dificultad</p>
+                                    <p class="itemf">Tiempo</p>
+                                  </div>
+                                  <div class="tables">
+                                      <table id="tabladeranking">
+                                          <thead>
+                                          </thead>
+                                          <tbody>
+                                      
+                                              {% if gamers %}
+                                              {% for gamer in gamers %}
+                                              {% if forloop.first %}
+                                            <tr class="trhover  inicial shadow-inicial" style="display: flex; flex-direction:row; justify-content:center; ">
+                                              <td class="itemp">{{gamer.nickname.username}}</td>
+                                              <td class="itemp">{{gamer.dificult}}</td>
+                                              <td class="itemp">{{gamer.score}}{{gamer.total_segundos}}s</td>
+                                            </tr>
+                                            {% endif %}
+                                            {% if not forloop.first and not forloop.last %}
+                                            <tr class="trhover" style="display: flex; flex-direction:row; justify-content:center; ">     
+                                              <td class="itemp">{{gamer.nickname.username}}</td>
+                                              <td class="itemp">{{gamer.dificult}}</td>
+                                              <td class="itemp">{{gamer.score}}{{gamer.total_segundos}} s</td>                  
+                                            </tr>
+                                            {% endif %}
+                                            {% if forloop.last %}
+                                            <tr class="trhover shadow-final final " style="display:flex; flex-direction:row;justify-content:center;">
+                                              <td class="itemp">{{gamer.nickname.username}}</td>
+                                              <td class="itemp">{{gamer.dificult}}</td>
+                                              <td class="itemp">{{gamer.score}}{{gamer.total_segundos}} s</td>
+                                            </tr> 
+                                            {% endif %}
+                                              {% endfor %}
+                                              {% endif %}
+                                          </tbody>
+                                        </table>
+                                  </div>
                         </div>
                     </div>    
                 </div>

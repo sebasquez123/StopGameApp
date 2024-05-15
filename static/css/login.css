@@ -43,3 +43,240 @@ html,body {
   .fa{
     margin-left: 5px; 
   }
+
+  .message-header{font-size: 25px;}
+  #advertencia{
+    font-weight: bold;
+    font-size: 20px;
+  }
+  #warning{
+    display: none;
+    position: absolute;
+    top: 38%;
+    left: 30%;
+    z-index: 3000;
+    border-radius: 25px;
+    width: 500px;
+    height: 100px;
+  }
+  #warning.active{
+    display: block;
+    animation: subir-bajar 3s infinite;
+  }
+
+  @keyframes subir-bajar {
+  
+    50% {
+      
+      transform: translateY(-20%);
+      
+    }
+    
+  }
+
+
+
+  /* boton para generar codigos */
+  .ui-btn {
+  --btn-default-bg: hsl( 221 , 14% , 9% );
+  --btn-padding: 15px 20px;
+  --btn-hover-bg: hsl( 221 , 14% , 9% );
+  --btn-transition: .3s;
+  --btn-letter-spacing: .1rem;
+  --btn-animation-duration: 1.2s;
+  --btn-shadow-color: #00000023;
+  --btn-shadow: 0 2px 10px 0 var(--btn-shadow-color);
+  --hover-btn-color: #fae821;
+  --default-btn-color: #fff;
+  --font-size: 16px;
+  /* 👆 this field should not be empty */
+  --font-weight: 600;
+  --font-family: Menlo,Roboto Mono,monospace;
+  /* 👆 this field should not be empty */
+  border-radius: 10px;
+  margin: 5px 0px 0px 5px;
+  width: 70px;
+  height: 30px;
+}
+
+/* button settings 👆 */
+
+.ui-btn {
+  box-sizing: border-box;
+  padding: var(--btn-padding);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--default-btn-color);
+  font: var(--font-weight) var(--font-size) var(--font-family);
+  background: var(--btn-default-bg);
+  border: none;
+  cursor: pointer;
+  transition: var(--btn-transition);
+  overflow: hidden;
+  box-shadow: var(--btn-shadow);
+}
+
+.ui-btn span {
+  letter-spacing: var(--btn-letter-spacing);
+  transition: var(--btn-transition);
+  box-sizing: border-box;
+  position: relative;
+  background: inherit;
+}
+
+.ui-btn span::before {
+  box-sizing: border-box;
+  position: absolute;
+  content: "";
+  background: inherit;
+}
+
+.ui-btn:hover, .ui-btn:focus {
+  background: var(--btn-hover-bg);
+}
+
+.ui-btn:hover span, .ui-btn:focus span {
+  color: var(--hover-btn-color);
+}
+
+.ui-btn:hover span::before, .ui-btn:focus span::before {
+  animation: chitchat linear both var(--btn-animation-duration);
+}
+
+@keyframes chitchat {
+  0% {
+    content: "#";
+  }
+
+  5% {
+    content: ".";
+  }
+
+  10% {
+    content: "^{";
+  }
+
+  15% {
+    content: "-!";
+  }
+
+  20% {
+    content: "#$_";
+  }
+
+  25% {
+    content: "№:0";
+  }
+
+  30% {
+    content: "#{+.";
+  }
+
+  35% {
+    content: "@}-?";
+  }
+
+  40% {
+    content: "?{4@%";
+  }
+
+  45% {
+    content: "=.,^!";
+  }
+
+  50% {
+    content: "?2@%";
+  }
+
+  55% {
+    content: "\;1}]";
+  }
+
+  60% {
+    content: "?{%:%";
+    right: 0;
+  }
+
+  65% {
+    content: "|{f[4";
+    right: 0;
+  }
+
+  70% {
+    content: "{4%0%";
+    right: 0;
+  }
+
+  75% {
+    content: "'1_0<";
+    right: 0;
+  }
+
+  80% {
+    content: "{0%";
+    right: 0;
+  }
+
+  85% {
+    content: "]>'";
+    right: 0;
+  }
+
+  90% {
+    content: "4";
+    right: 0;
+  }
+
+  95% {
+    content: "2";
+    right: 0;
+  }
+
+  100% {
+    content: "";
+    right: 0;
+  }
+}
+
+
+
+
+@keyframes typeAndDelete {
+  0%,
+  10% {
+    width: 0;
+  }
+  45%,
+  55% {
+    width: 6.2em;
+  } /* adjust width based on content */
+  90%,
+  100% {
+    width: 0;
+  }
+}
+
+.textloader {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.2em solid rgb(255, 225, 0); /* Cursor */
+  animation: typeAndDelete 4s steps(11) infinite,
+  blinkCursor 0.5s step-end infinite alternate;
+  margin-top: 1.5em;
+  color:white;
+font-size: 20px;
+font-family: monospace;
+}
+#gamemode{
+  font-size: 25px;
+  color:#2174fa
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Desactiva el estilo predeterminado de WebKit */
+    appearance: none; /* Desactiva el estilo predeterminado */
+    margin: 0; /* Ajusta el margen si es necesario */
+}

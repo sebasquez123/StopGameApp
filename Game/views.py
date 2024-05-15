@@ -23,7 +23,7 @@ def juego(request):
         return JsonResponse(mensaje)
     else:
         pass
-    context={}
+    context={'gamers':gamer.objects.all()}
     return render(request, 'JustGame/juego.html',context)
 
 
@@ -139,7 +139,9 @@ def actualizar_ranking(tiempo_inicial,tiempo_final,nick,fase,trama,letra):
     gamers= gamer.objects 
     print('actualizando')
     global puntos_por_item
-    
+    global score_1
+    global score_2
+    global score_3
     if tiempo_inicial and tiempo_final:
     
         diferencia = tiempo_final - tiempo_inicial
@@ -159,6 +161,9 @@ def actualizar_ranking(tiempo_inicial,tiempo_final,nick,fase,trama,letra):
             vector_ganador = definir_juego()
             gamers.filter(nickname__username = nick).update(total_segundos=vector_ganador[1],score=vector_ganador[0])
             mensaje = {'mensaje':'terminar','score_final':vector_ganador,'puntaje_item':puntos_por_item,'tiempo':tiempo,'score':score}
+            score_1=0
+            score_2=0
+            score_3=0
             return mensaje
         else:
             pass
@@ -189,9 +194,7 @@ def Calculo_de_score(fase,trama,letra):
     global score_1
     global score_2
     global score_3
-    score_1 = 0 
-    score_2 = 0
-    score_3 = 0
+
     arreglo_de_clases =['nombre','apellido','ciudad','color','fruta','cosa','animal']
     
     
@@ -247,16 +250,16 @@ def definir_juego ():
     global score_1
     global score_2
     global score_3
-
+    print('score_1:',score_1,',score_2:',score_2,',score_3:',score_3)
     matriz = [[score_1,tiempo_1],[score_2,tiempo_2],[score_3,tiempo_3]]
     matriz.sort(key= lambda x: x[0],reverse=True)
-    
+    print('matriz:',matriz)
+
     if matriz[0][0]==matriz[1][0]:
         if matriz[0][1]>matriz[1][1]:
-            ganador = matriz[0]
+            return matriz[1]
         else:
-            ganador = matriz[1]
+            return matriz[0]
     else:
-        ganador = matriz[0]
+        return matriz[0]
     
-    return ganador

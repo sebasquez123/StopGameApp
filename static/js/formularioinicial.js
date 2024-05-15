@@ -40,7 +40,7 @@ fondos.forEach(fondo => {
         titulo.style.color = 'black';
         
         if (fondo_seleccionado == 'f1') {
-            titulo.innerHTML = 'Perros';
+            titulo.innerHTML = 'Bachichas';
             select.style.background = 'url(../../../static/images/fondo0.jpg)';
             select.style.backgroundSize = 'cover';
             } 
@@ -50,7 +50,7 @@ fondos.forEach(fondo => {
             select.style.backgroundSize = 'cover';
             }
         else if (fondo_seleccionado == 'f3') {
-            titulo.innerHTML = 'Arañas';
+            titulo.innerHTML = 'tucanes';
             select.style.background = 'url(../../../static/images/fondo2.jpg)';
             select.style.backgroundSize = 'cover';
             }
@@ -114,24 +114,24 @@ boton_jugar.addEventListener('click', (event) => {
 event.preventDefault();
 
 if (nickname.value == '') {
-    document.getElementById('warning').classList.add('active');
+    warning.classList.add('active');
     document.getElementById('advertencia').innerHTML = 'Ingresa tu mejor <strong style="color:white;">apodo</strong> para continuar...';
 }
 else if (login.dificultad_seleccionada == '') {
     console.log('si sirve')
-    document.getElementById('warning').classList.add('active');
+    warning.classList.add('active');
     document.getElementById('advertencia').innerHTML = 'Selecciona una <strong style="color:white;">dificultad</strong> para continuar...';
 }
 else if (fondo_seleccionado == '') {
-    document.getElementById('warning').classList.add('active');
-    document.getElementById('advertencia').innerHTML = 'Selecciona un estilo de <strong style="color:white;">fondo</strong> para continuar...';
+    warning.classList.add('active');
+    advertencia.innerHTML = 'Selecciona un estilo de <strong style="color:white;">fondo</strong> para continuar...';
     
 }
 else{
 //cuando todo es correcto, se envia el objeto con el nombre, la dificultad y el fondo seleccionado por medio 
 //de una solicitud http
-login.nickname = nickname.value;
-enviarDatos();
+    login.nickname = nickname.value;
+    gamemode.click();
 }
 });
 

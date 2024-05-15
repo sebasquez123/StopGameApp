@@ -23,7 +23,7 @@ function desplegarPuntaje() {
     let score = sessionStorage.getItem("score");
     let tiempo = sessionStorage.getItem("tiempo_total");
     let puntaje_item = sessionStorage.getItem("fila_puntaje").split(',');
-     
+    
     for (let i = 1; i < 4; i++) {
 
         if (fase == i) {
@@ -47,15 +47,24 @@ function desplegarPuntaje() {
     }
        
 }
-    
+
 abrir_resultados = () => {
-    // se abre el modal de finalizacion de manera forzada
-    boton = document.getElementById('inffbtn').click();
-    // se añade la informacion del juego al modal
-    document.getElementById('dificult_board').innerHTML = sessionStorage.getItem("dificultad").toUpperCase();
-    document.getElementById('time_board').innerHTML = sessionStorage.getItem("tiempo_total");
-    document.getElementById('score_board').innerHTML = sessionStorage.getItem("score");
-}
+    let stops = document.getElementById('stop');
+    let score_final = sessionStorage.getItem("score_final").split(',');
+    stops.disabled = true;
+
+    setTimeout(function () {
+            // se abre el modal de finalizacion de manera forzada
+            document.getElementById('inffbtn').click();
+            // se añade la informacion del juego al modal
+            document.getElementById('dificult_board').innerHTML = sessionStorage.getItem("dificultad").toUpperCase();
+            document.getElementById('time_board').innerHTML = score_final[1] + 's';
+            document.getElementById('score_board').innerHTML = score_final[0] + 'p';
+       
+        
+    }, 2000); 
+    }
+    
         
 
  

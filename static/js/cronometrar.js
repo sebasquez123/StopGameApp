@@ -44,6 +44,7 @@
                         sessionStorage.setItem("tiempo_total", data.tiempo);
                         sessionStorage.setItem("score", data.score);
                         sessionStorage.setItem("fila_puntaje", data.puntaje_item);
+                        sessionStorage.setItem("score_final", data.score_final);
                         detenerCronometro();
                         desplegarPuntaje();
                       }
