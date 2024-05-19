@@ -7,4 +7,13 @@ habitación.
 ![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-solitario.png)
 ![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-EnterCode.png)
 ![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-HostCode.png)
-
+Al iniciar el juego, se añade una información inicial para instruir al jugador; alli se introduce a las funcionalidades básicas y al modelo de puntuación. Cuando el modo de
+juego es Online, se espera a que los participantes entren a la sesión y activen el boton de " Estoy listo ".
+Solamente el HOST debera activar la sesion de juego, cuando todos los jugadores esten listos.
+![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-instructivo.png)
+El juego se desarrolla completando 3 ciclos con la misma dificultad, habiendo 3 puntuaciones, el servidor calcula y alimenta la base de datos. 
+![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-Juego.png)
+El jugador con el mejor puntajede acuerdo a la estrategia de calificación, sera mostrado como ganador de la partida una vez se preciona el boton
+de STOP.
+![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-finalizacion.png)
+al finalizar, se propone revivir la experiencia nuevamente con el mismo equipo, o salir del juego. cabe resaltar que las posibles palabras correctas dentro del juego se evaluan segun las palabras existentes en la base de datos. de esta manera, si falta una de alguna categoria, puede añadirse facilmente con un INSERT.
