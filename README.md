@@ -1,5 +1,5 @@
-Un aplicativo de entretenimiento diseñado para revivir el tradicional juego que conocemos como "Stop". Este modulo tiene como finalidad registrar un jugador que se guardara
-en base de datos SQlite3 y se calculara un puntaje de habilidad al terminar el juego.
+<strong><h3>Un aplicativo de entretenimiento diseñado para revivir el tradicional juego que conocemos como "Stop". Este modulo tiene como finalidad registrar un jugador que se guardara
+en base de datos SQlite3 y se calculara un puntaje de habilidad al terminar el juego.<h3>
 ![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-inicio.png)
 Existen 2 modos de juego, el primero es una batalla online, donde se puede ingresar un codigo de conexión al servidor para todo aquel que desea ser guest y/o compartir un 
 codigo cuando se desea ser host. el segundo modo de juego es cuando se desea jugar en solitario sin conexión al servidor, es util cuando los integrantes estan en la misma
@@ -17,4 +17,4 @@ El jugador con el mejor puntajede acuerdo a la estrategia de calificación, sera
 de STOP.
 ![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-finalizacionJuego.png)
 Al finalizar, se propone revivir la experiencia nuevamente con el mismo equipo, o salir del juego. Cabe resaltar que las posibles palabras correctas dentro del juego se evaluan
-segun las palabras existentes en la base de datos. de esta manera, si falta una de alguna categoria, puede añadirse facilmente con un INSERT.<h1>si es asi<h1>
+segun las palabras existentes en la base de datos. de esta manera, si falta una de alguna categoria, puede añadirse facilmente con un INSERT.<strong>
