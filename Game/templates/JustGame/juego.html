@@ -183,9 +183,9 @@
                         <div class="ganaste_modal_seccion2">
                           <h3>RESUMEN</h3>
                                   <div class="encabezado">
-                                    <p class="itemp">Nombre</p>
-                                    <p class="itemp">Dificultad</p>
-                                    <p class="itemf">Tiempo</p>
+                                    <p class="itemp" style="color:#ffbf00;">Nombre</p>
+                                    <p class="itemp" style="color:#ffbf00;">Dificultad</p>
+                                    <p class="itemf" style="color:#ffbf00;">Tiempo</p>
                                   </div>
                                   <div class="tables">
                                       <table id="tabladeranking">
@@ -196,21 +196,21 @@
                                               {% if gamers %}
                                               {% for gamer in gamers %}
                                               {% if forloop.first %}
-                                            <tr class="trhover  inicial shadow-inicial" style="display: flex; flex-direction:row; justify-content:center; ">
+                                            <tr class="trhover  inicial shadow-inicial">
                                               <td class="itemp">{{gamer.nickname.username}}</td>
                                               <td class="itemp">{{gamer.dificult}}</td>
                                               <td class="itemp">{{gamer.score}}{{gamer.total_segundos}}s</td>
                                             </tr>
                                             {% endif %}
                                             {% if not forloop.first and not forloop.last %}
-                                            <tr class="trhover" style="display: flex; flex-direction:row; justify-content:center; ">     
+                                            <tr class="trhover">     
                                               <td class="itemp">{{gamer.nickname.username}}</td>
                                               <td class="itemp">{{gamer.dificult}}</td>
                                               <td class="itemp">{{gamer.score}}{{gamer.total_segundos}} s</td>                  
                                             </tr>
                                             {% endif %}
                                             {% if forloop.last %}
-                                            <tr class="trhover shadow-final final " style="display:flex; flex-direction:row;justify-content:center;">
+                                            <tr class="trhover shadow-final final">
                                               <td class="itemp">{{gamer.nickname.username}}</td>
                                               <td class="itemp">{{gamer.dificult}}</td>
                                               <td class="itemp">{{gamer.score}}{{gamer.total_segundos}} s</td>

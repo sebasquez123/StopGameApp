@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<button id="gamemode" class="ui-btn" type="button" data-bs-toggle="modal" data-bs-target="#Gamemode"></button>
+<button id="gamemode" type="hidden" data-bs-toggle="modal" data-bs-target="#Gamemode"></button>
 
     <section class="is-fullheight">
         <div class="hero-body">
@@ -87,13 +87,13 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="staticBackdropLabel">Last Team</h5>
-          <i class="fa fa-trophy" style="color: rgb(17, 0, 255); font-size:30px;"></i>
+          <i class="fa fa-trophy" style="color: #fae821; font-size:30px;"></i>
           <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
         </div>
         <div class="modal-body">
           <p class="itemp">Nombre</p>
           <p class="itemp">Dificultad</p>
-          <p class="itemf">Tiempo</p>
+          <p class="itemf">Puntaje</p>
         </div>
         <div class="tables">
             <table id="tabladeranking">
@@ -174,7 +174,7 @@
           <h5 class="modal-title" id="staticBackdropLabel">Online Game</h5>
         </div>
         <div class="modalbody" style="padding:30px; display:flex; justify-content:center; align-items:center;flex-direction:column; font-size:20px;">
-          <p>Ingresa un codigo de hosting:</p>
+          <p>Enter a host code:</p>
           <br>
           <input id="Areacode" class="input is-large" type="number" style="text-align:center;" placeholder="Codigo de partida">
         </div>
@@ -193,7 +193,7 @@
           <h5 class="modal-title" id="staticBackdropLabel">Online Game</h5>
         </div>
         <div class="modalbody" style="padding:30px; display:flex; justify-content:center; align-items:center;flex-direction:column; font-size:20px;">
-          <span>GENERATING CODES</span><hr>
+          <div class="ui-btn"><span>GENERATING CODE...</span></div><hr>
           <div id="textloader" class="textloader">Loading...</div>
           <p id="sessioncode"></p>
           <hr>
@@ -210,14 +210,13 @@
   <script src="{% static 'js/envioformulario.js'%}"></script>
 
   <script>
-    var codigolocal = 0;
+    var codigodehostinglocal = 0;
     var codigodelhoster = 0;
-    gamemode.style.display = 'none';
-    
+    initparty.disabled = true;
 
     alonegame.addEventListener('click', () => {
 
-        codigolocal = 0;
+        codigodehostinglocal = 0;
         codigodelhoster = 0;
         enviarDatos();
         
@@ -225,24 +224,23 @@
 
     
     hotingbtn.addEventListener('click', function(event){
-    codigolocal = Math.floor(Math.random() * 1000000);
+    codigodehostinglocal = Math.floor(Math.random() * 1000000);
     setTimeout(() => {
       textloader.style.display = 'none';
-      sessioncode.innerHTML = codigolocal;
+      sessioncode.innerHTML = codigodehostinglocal;
+      initparty.disabled = false;
     }, 4000);
     if(!hostingcode.contains(event.target)){
       textloader.style.display = 'block';
       sessioncode.innerHTML = '';
+      initparty.disabled = true;
     }
     });
-
-    
-
 
     searchpartybtn.addEventListener('click', () => {
         if(Areacode.value){
             if(Areacode.value == codigodelhoster){
-              codigolocal = 0;
+              codigodehostinglocal = 0;
               enviarDatos();
             }
             else{

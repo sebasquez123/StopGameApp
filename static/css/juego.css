@@ -199,6 +199,7 @@ font-family:monospace !important;
             width: 500px;
         }
 }
+
 .modal{
     max-height: 100% !important;
     overflow-y: auto !important;
@@ -232,13 +233,14 @@ font-family:monospace !important;
        border-collapse: collapse;
    }
    .contenido-inf2{
-    display: grid;
+        display: grid;
        grid-template-columns: 1fr;
        grid-template-rows: repeat(2, .5fr);
        gap: 10px;
        align-items: center;
        justify-items:center;
        border-collapse: collapse;
+       height: 650px;
    }
    .steps{
        display: grid;
@@ -280,3 +282,70 @@ font-family:monospace !important;
     transition: background 1s ease; /* Transición suave para el cambio de color */
 }
 
+/* el modal final */
+.encabezado {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  padding: 25px 25px 0px 25px;
+  font-size: medium;
+  gap: 0px;
+  align-items: center;
+  justify-items:center;
+  border-collapse: collapse;
+  font-size: 20px;
+  width: 100%;
+
+}
+.itemp{
+  
+  border-bottom: 2px solid #0000001d;
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  flex-shrink: 1;
+  font-size: 25px;
+  color:#ffffff;
+}
+.itemf{
+  border-bottom: 2px solid #0000001d;
+  display: flex;
+  justify-content: center;
+  width: 150px; 
+  flex-shrink: 1;
+  font-size: 25px;
+  color:#ffffff;
+}
+.final{
+  margin-bottom: 5%;
+}
+.borde-final{border-bottom: none !important;}
+
+.inicial{
+  margin-top: 5%;
+}
+.shadow-inicial{
+  box-shadow: 0px -5px 5px -5px #ffc80084;
+}
+.shadow-final{
+  box-shadow: 0px 5px 5px -5px #ffc80084;
+}
+
+.tables{
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  width: 100%;
+  margin-top: -50px;
+}
+#tabladeranking{width: 100%;}
+.trhover{
+  background-color: #1d1d1d;
+  border-radius: 10px;
+  display: flex; flex-direction:row; justify-content:space-around;
+}
+
+.trhover:hover{
+  background-color: #00000042;
+}

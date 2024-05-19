@@ -2,7 +2,7 @@
 // cuando el DOM esta completamente cargado, se autoinicia el modal de informacion inicial del juego
 
 document.addEventListener('DOMContentLoaded', function(){
-    document.getElementById('infibtn').click();
+    
     for (let i = 1; i < 4; i++) {
         document.querySelectorAll('#fila'+i+' input').forEach(element => { element.autocomplete = "off"; });
     }

@@ -1,6 +1,6 @@
 
           
-    
+                document.getElementById('infibtn').click();
            //se recuperan los datos guardados en el sessionStorage para mostrarlos en la vista del juego
            //se muestra el nombre, la dificultad y el fondo seleccionado
                 const nombretext= document.getElementById("nombre");
