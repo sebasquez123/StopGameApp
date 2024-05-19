@@ -15,5 +15,5 @@ El juego se desarrolla completando 3 ciclos con la misma dificultad, habiendo 3 
 ![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-Juego.png)
 El jugador con el mejor puntajede acuerdo a la estrategia de calificación, sera mostrado como ganador de la partida una vez se preciona el boton
 de STOP.
-![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-finalizacion.png)
+![](https://github.com/sebasquez123/StopGameApp/blob/main/Figura-finalizacionJuego.png)
 al finalizar, se propone revivir la experiencia nuevamente con el mismo equipo, o salir del juego. cabe resaltar que las posibles palabras correctas dentro del juego se evaluan segun las palabras existentes en la base de datos. de esta manera, si falta una de alguna categoria, puede añadirse facilmente con un INSERT.
