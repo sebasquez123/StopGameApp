@@ -222,6 +222,7 @@ font-family:monospace !important;
        justify-items:center;
        overflow-x: auto !important;
        scrollbar-width: none !important;
+       height: 250px;
    }
    .contenido-inf{
        display: grid;

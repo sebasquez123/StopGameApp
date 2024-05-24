@@ -6,7 +6,7 @@
 function enviarDatos()
 {
     console.log('Enviando datos:');
-    console.log(login);
+    
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
     fetch('/entrar/', {
@@ -36,12 +36,24 @@ function enviarDatos()
             //de ser los esperados,  se guardan temporalmente en el sessionStorage
             // para terminar el ciclo de la vista del login y redirigir a la vista del juego
 
-            console.log('recibiendo datos completos:'+' '+ data.dificultad +' '+ data.nick);
-            location.href = data.redireccion;
-
+            console.log('recibiendo datos completos');
+            
+            //variables de servidor
+            sessionStorage.setItem('espacio_host', data.espacio_host);
+            sessionStorage.setItem('codigo_host', data.codigo_host);
+            sessionStorage.setItem('espacio_sesion', data.espacio_sesion);
+            sessionStorage.setItem('codigo_sesion', data.codigo_sesion);
+            //variables de visualizacion
             sessionStorage.setItem('dificultad', data.dificultad);
             sessionStorage.setItem('nick', data.nick);
             sessionStorage.setItem('urlf', fondo_seleccionado);
+            excepciones(data.redireccion,data.espacio_host,data.espacio_sesion,data.codigo_host,data.codigo_sesion);
+            
+        }
+        else if (data.mensaje) {
+            //si no son los esperados, se muestra un mensaje de error
+            warning.classList.add('active');
+            advertencia.innerHTML = "Tu nombre no puede contener mas de 10 caracteres y menos de 3 caracteres...";
         }
         else
         {
@@ -56,3 +68,21 @@ function enviarDatos()
 }
 
 
+function excepciones(url,espacio_host,espacio_sesion,codigo_host,codigo_sesion)
+{
+    if (codigo_host == 0 && espacio_sesion == false) //ingresando por codigo de sesion
+    {
+        warning.classList.add('active');
+        advertencia.innerHTML = 'No existe este codigo de sesión, intenta con otro codigo...';
+    }
+    else if (codigo_sesion == 0 && espacio_host == false) // hosteando el juego
+    {
+        warning.classList.add('active');
+        advertencia.innerHTML = 'Todos los servidores estan ocupados... intenta mas tarde...';
+    }
+    else
+    {
+      location.href = url;  
+    }
+    
+}

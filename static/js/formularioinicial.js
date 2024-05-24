@@ -1,9 +1,13 @@
 var  login ={
     dificultad_seleccionada: '',
     nickname: '',
+    codigo_host:0 ,
+    codigo_sesion : 0,
 }
 var fondo_seleccionado = '';
 
+
+initparty.disabled = true;
 
 //de aqui en adelante, se realiza la manipulacion del DOM para desplegar elementos del formulario inicial
 //por medio de clases css
@@ -134,6 +138,53 @@ else{
     gamemode.click();
 }
 });
+
+
+    
+// si el usuario decide jugar solo, no se asigna ningun codigo de juego y se redirige a la pagina de juego
+    alonegame.addEventListener('click', () => {
+
+        login.codigo_host = 0;
+        login.codigo_sesion = 0;
+        enviarDatos();
+        
+    });
+
+    
+// si se preciona el boton de host, se genera un codigo automaticamente y se asigna a la variable codigo_host
+// despues de generarse, si se preciona fuera del contenedor, se reinicia la generacion de codigo
+    hotingbtn.addEventListener('click', function(event){
+    login.codigo_host = Math.floor(Math.random() * 1000000);
+    setTimeout(() => {
+      textloader.style.display = 'none';
+      sessioncode.innerHTML = login.codigo_host;
+      initparty.disabled = false;
+    }, 4000);
+    if(!hostingcode.contains(event.target)){
+      textloader.style.display = 'block';
+      sessioncode.innerHTML = '';
+      initparty.disabled = true;
+    }
+    });
+// si ya se tiene el codigo de host, se envia el objeto con el codigo y se redirige a la pagina del juego
+    initparty.addEventListener('click', () => {
+      login.codigo_sesion = 0;
+         enviarDatos();
+    });
+
+// si en ves de jugar como host, se decide unir a la partida proporcionando un codigo , se verifica 
+// que el codigo coincida con el servidor. si es correcto, se redirige a la pagina de juego
+    searchpartybtn.addEventListener('click', () => {
+        if(Areacode.value){            
+            login.codigo_host = 0;
+            login.codigo_sesion = Areacode.value;
+              enviarDatos();    
+        }else{
+            warning.classList.add('active');
+            advertencia.innerHTML = 'Ingresa un codigo para continuar...';
+        }
+    }); 
+    
 
 window.addEventListener('load', function () {
     sessionStorage.clear();

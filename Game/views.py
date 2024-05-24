@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from .models import gamer, nombre, apellido, ciudad, color, fruta, cosa, animal 
+from .models import gamer, nombre, apellido, ciudad, color, fruta, cosa, animal , esparcimiento
 from django.http import JsonResponse #importo la libreria para poder enviar datos en formato json si es necesario
 from .forms import Filtrar_datos # importo el formulario que cree con la clase de registro
 from django.contrib.auth.models import User #importo el modelo de usuario autenticado de django
@@ -8,7 +8,18 @@ from datetime import datetime
 from unidecode import unidecode
 
 
-
+# espacioEnServidor = False
+# codigo_de_host = 0
+# codigo_de_partida = 0
+tiempo_inicial = 0
+tiempo_final = 0   
+tiempo_1=0
+tiempo_2=0
+tiempo_3=0
+score_1=0
+score_2=0
+score_3=0
+puntos_por_item = [0,0,0,0,0,0,0]
 
 def juego(request):
     
@@ -31,9 +42,16 @@ def juego(request):
 #Comienza el programa a correr a partir de la vista de login
 def login(request):
     
+    codigo_existe = False
+    espacioEnServidor= False
+    codigo_de_host = 0
+    codigo_de_partida = 0
+    
+    
     #se llaman las clases de los objetos gamer y usuario para poder consultar en ellos
     gamers= gamer.objects.all()
     usuarios = User.objects.all()
+    servidores = esparcimiento.objects.all()
     
     # si se recibe un metodo post...
     if request.method == 'POST':
@@ -45,13 +63,30 @@ def login(request):
         #se crea una instancia de la clase que limpia los datos, esta clase esta ubicada en forms.py
         user_name = data.get ('nickname')
         dificultad = data.get ('dificultad_seleccionada')
+        codigo_de_host = data.get ('codigo_host')
+        codigo_de_partida = data.get ('codigo_sesion')
         limpieza_de_datos = Filtrar_datos()
+
+        
         
         # se procede a llamar los metodos de la clase dentro de un try-except para manejar los errores
         try:
             nick =  str(limpieza_de_datos.nickname(user_name))
             dificult =  limpieza_de_datos.dificultad(dificultad)
             print (nick, dificult,' datos proporcionados correctamente')
+            
+            #asignamos el codigo de host a la tabla de servidor e ingresamos los usuarios que vienen con codigo 
+            
+            espacioEnServidor = asignar_codigo_a_servidor(codigo_de_host,codigo_de_partida,nick,dificult,espacioEnServidor)
+            codigo_existe = buscar_registrar_partida(codigo_de_host,codigo_de_partida,nick,dificult,codigo_existe)
+            
+            # son alternativos, si uno es 0, el otro es diferente de 0
+            print(codigo_de_host) 
+            print(codigo_de_partida)
+            
+            print(servidores) #visualizacion del servidor total
+            print(espacioEnServidor) #hay espacio en el servidor? si y solo si se hostea la partida
+            print(codigo_existe) #si existe el codigo en el servidor? si y solo si se une a una partida 
             
             #una vez se tienen los datos limpios, se procede a verificar si el usuario ya existe por medio de un
             #for loop que recorre los usuarios existentes y retorna un booleano
@@ -66,11 +101,13 @@ def login(request):
 
 
                 #si el usuario existe, se actualiza su informacion en la base de datos
-            if usuario_existente == True:
+            if usuario_existente:
 
                 print('usuario ya existe')
+                print(codigo_de_host)
+                print(codigo_de_partida)
                 gamer.objects.filter(nickname__username=nick).update(dificult=dificult) 
-                mensaje = {'redireccion':'/jugar','dificultad':dificult,'nick':nick}
+                mensaje = {'redireccion':'/jugar','dificultad':dificult,'nick':nick,'espacio_host':espacioEnServidor,'codigo_host':codigo_de_host,'espacio_sesion':codigo_existe,'codigo_sesion':codigo_de_partida}
                 return JsonResponse(mensaje)
             else:
                 #si el usuario no existe
@@ -82,37 +119,76 @@ def login(request):
                 update_user.save()   
                 update_jugador = gamer(nickname=update_user, dificult=dificult)
                 update_jugador.save()
-                print(dificult)
-                mensaje = {'redireccion':'/jugar','dificultad':dificult,'nick':nick}
+                print(codigo_de_host)
+                print(codigo_de_partida)
+                mensaje = {'redireccion':'/jugar','dificultad':dificult,'nick':nick,'espacio_host':espacioEnServidor,'codigo_host':codigo_de_host,'espacio_sesion':codigo_existe,'codigo_sesion':codigo_de_partida}                
                 print('usuario creado exitosamente')
                 return JsonResponse(mensaje)
-                
-              
+                      
         except  ValueError as e:
             nick =''
             dificult = ''
             print(f'error: {e}')
             mensaje = {'mensaje':f'error: {e}'}
             return JsonResponse(mensaje)
-    
     else:
         pass
-    
-    
+        
     context = {'gamers': gamers}
     return render(request, 'JustGame/login.html', context)
 
 
-tiempo_inicial = 0
-tiempo_final = 0   
-tiempo_1=0
-tiempo_2=0
-tiempo_3=0
-score_1=0
-score_2=0
-score_3=0
-puntos_por_item = [0,0,0,0,0,0,0]
 
+def asignar_codigo_a_servidor(codigo_de_host,codigo_de_partida,nick,dificult,espacioEnServidor):
+    servidores = esparcimiento.objects.all()
+
+    if codigo_de_host != 0 and codigo_de_partida == 0: 
+        for servidor in servidores:
+            if servidor.codigo == 0:
+                servidor.codigo = codigo_de_host
+                servidor.nick1 = nick
+                servidor.dificultad = dificult
+                servidor.save()
+                espacioEnServidor = True
+                print ('Espacio en el servidor disponible:',espacioEnServidor)
+                break 
+            else:
+                print ('Espacio en el servidor no disponible',espacioEnServidor)
+                espacioEnServidor = False         
+    else:
+        espacioEnServidor = False 
+    
+    return espacioEnServidor
+
+    
+#cada vez que haya un codigo de partida, se revisara la cantidad de nicks que hay en el atributo de la clase con codigo
+#xxxxxx, si hay un espacio disponible, en ese espacio se almacena el nick y se prioriza la dificultad del host.
+def buscar_registrar_partida(codigo_de_host,codigo_de_partida,nick,dificult,codigo_existe):
+    servidores = esparcimiento.objects.all()
+    codigo_de_partida = int(codigo_de_partida)
+    if codigo_de_partida != 0 and codigo_de_host == 0: 
+        for servidor in servidores:
+            if servidor.codigo == codigo_de_partida:
+                codigo_existe = True
+                print ("codigo Si existe en el servidor")
+                print(servidor)
+                break
+                
+            else:
+                codigo_existe = False
+                print ("codigo no existe dentro del servidor")
+    else:
+        codigo_existe = False
+        print(" no esta recibiendo codigo de partida")
+        
+    return codigo_existe
+        
+
+
+
+
+
+#logica para el modulo del juego
 def calculo_de_tiempos(estado,nick,fase,trama,letra):
     global tiempo_inicial
     global tiempo_final
@@ -262,4 +338,13 @@ def definir_juego ():
             return matriz[0]
     else:
         return matriz[0]
+    
+    
+    
+def get_data(request):
+    
+    data = list(esparcimiento.objects.values())
+    return JsonResponse(data,safe=False)
+        
+  
     

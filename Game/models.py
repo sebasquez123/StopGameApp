@@ -71,12 +71,15 @@ class animal(models.Model):
     def __str__(self):
         return  self.animal
 
-# class palabra: 
-#     def __init__(self,nombre,apellido,ciudad,color,fruta,cosa,animal):
-#         self.nombre = nombre
-#         self.apellido = apellido
-#         self.ciudad = ciudad
-#         self.color = color
-#         self.fruta = fruta
-#         self.cosa = cosa
-#         self.animal = animal
+class esparcimiento(models.Model):
+    id= models.AutoField(primary_key=True)
+    codigo = models.IntegerField(default=0)
+    nick1 = models.CharField(max_length=20, default='',blank=True)
+    nick2 = models.CharField(max_length=20, default='',blank=True)
+    nick3 = models.CharField(max_length=20, default='',blank=True)
+    nick4 = models.CharField(max_length=20, default='',blank=True)
+    nick5 = models.CharField(max_length=20, default='',blank=True)
+    dificultad = models.CharField(max_length=20, default='',blank=True)
+    
+    def __str__(self):
+        return  str(self.codigo)

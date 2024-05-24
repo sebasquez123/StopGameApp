@@ -1,6 +1,32 @@
 
-          
                 document.getElementById('infibtn').click();
+                
+                var espacio_host = sessionStorage.getItem("espacio_host");
+                var codigo_host = sessionStorage.getItem("codigo_host");
+                var espacio_sesion = sessionStorage.getItem("espacio_sesion"); 
+                var codigo_sesion = sessionStorage.getItem("codigo_sesion");
+                
+                
+                console.log(typeof(espacio_host), codigo_host, espacio_sesion, typeof(codigo_sesion));
+                if (espacio_host == 'false' && espacio_sesion == 'false'){
+                    onlinemode.style.display = "none";
+                    listobtn.style.display = "none";
+                }
+                else if (espacio_host == 'true' && espacio_sesion == 'false')
+                {
+                    onlinemode.style.display = "block";
+                    document.querySelector('#onlinemode h3').innerHTML = "CODIGO: " + codigo_host;
+                }
+                else if (espacio_host == 'false' && espacio_sesion == 'true')
+                {
+                    onlinemode.style.display = "block";
+                    document.querySelector('#onlinemode h3').innerHTML = "CODIGO: " + codigo_sesion;
+                }
+                else 
+                {
+                    print("error al procesar los codigos...")
+                    }
+                
            //se recuperan los datos guardados en el sessionStorage para mostrarlos en la vista del juego
            //se muestra el nombre, la dificultad y el fondo seleccionado
                 const nombretext= document.getElementById("nombre");
@@ -133,8 +159,8 @@
             
             // se controla el evento del boton de salida, para cerrar la sesion y ademas borrar los datos almacenados
             // en el sessionStorage
-            const salida = document.getElementById("salir");
-            salida.addEventListener("click",function(){
+            
+            salir.addEventListener("click",function(){
             sessionStorage.clear();
             });
 

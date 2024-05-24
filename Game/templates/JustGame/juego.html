@@ -10,14 +10,14 @@
         <meta name="description" content="Un juego de cultura y velocidad mental muy conocido" />
         <meta name="author" content="Sebastian vasquez" />
         <title>Stop game</title>
-        <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+        {% comment %} <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" /> {% endcomment %}
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/ranking.css'%}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/juego.css'%}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/playbutton.css'%}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/modal_salida.css'%}">
+        {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/modal_salida.css'%}"> {% endcomment %}
     </head>
     
     <body>
@@ -133,15 +133,20 @@
                                 <img class="instructions" src="{% static 'images/finishgif.gif'%}" alt="Llenar los campos">
                             </div>
                         </div>
-                        <div><img class="versus instructions" src="{% static 'images/vs.png'%}" alt="icono versus"></div>
-                        <div class="ganaste_modal_seccion">
-                            <ul>
-                                <li><i class="fa fa-check-circle" style="color:red;"></i> sebas</li>
-                                <li><i class="fa fa-check-circle" style="color:green;"></i> cala</li>
-                                <li><i class="fa fa-check-circle" style="color:green;"></i> janny</li>
-                                <li><i class="fa fa-check-circle" style="color:green;"></i> simon</li>
-                                <li><i class="fa fa-check-circle" style="color:green;"></i> eliza</li>
-                            </ul>
+                        <div id="onlinemode" style="width:100%;">
+                          <div style="margin:40px 0px 40px 0px; width:100%;display:flex; justify-content:center; flex-direction:column;">
+                            <div style="display:flex; justify-content:center;"><h3></h3></div>
+                            <div style="display:flex; justify-content:center;margin-top:50px;" ><img class="versus instructions" src="{% static 'images/vs.png'%}" alt="icono versus"></div>
+                          </div>
+                          <div class="ganaste_modal_seccion">
+                                <ul>
+                                  <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li> 
+                                  {% comment %} <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li> 
+                                  <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li> 
+                                  <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li> 
+                                  <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li>  {% endcomment %}
+                                </ul>
+                          </div>
                         </div>
                     </div>    
                 </div>

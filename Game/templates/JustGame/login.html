@@ -28,14 +28,12 @@
                     <hr style="border-bottom: 3px solid rgb(255, 255, 255);">
                     <p class="subtitle" style="color: rgb(255, 255, 255);">Elige tus datos</p>
                     <div class="box">
-                        
                             <div class="field">
                                 <div class="control">
                                     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-                                    <input id="nickname" class="input is-large" type="text" style="padding-left:24px;" placeholder="Nombre">
+                                    <input id="nickname" class="input is-large" type="text" style="padding-left:24px;" placeholder="Nombre" autocomplete="off">
                                 </div>
                             </div>
-
                             <div class="field">
                                 <div style="width: 100%;">
                                     <div class="contenedor">
@@ -206,59 +204,8 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="{% static 'js/formularioinicial.js'%}"></script>
-  <script src="{% static 'js/envioformulario.js'%}"></script>
-
-  <script>
-    var codigodehostinglocal = 0;
-    var codigodelhoster = 0;
-    initparty.disabled = true;
-
-    alonegame.addEventListener('click', () => {
-
-        codigodehostinglocal = 0;
-        codigodelhoster = 0;
-        enviarDatos();
-        
-    });
-
-    
-    hotingbtn.addEventListener('click', function(event){
-    codigodehostinglocal = Math.floor(Math.random() * 1000000);
-    setTimeout(() => {
-      textloader.style.display = 'none';
-      sessioncode.innerHTML = codigodehostinglocal;
-      initparty.disabled = false;
-    }, 4000);
-    if(!hostingcode.contains(event.target)){
-      textloader.style.display = 'block';
-      sessioncode.innerHTML = '';
-      initparty.disabled = true;
-    }
-    });
-
-    searchpartybtn.addEventListener('click', () => {
-        if(Areacode.value){
-            if(Areacode.value == codigodelhoster){
-              codigodehostinglocal = 0;
-              enviarDatos();
-            }
-            else{
-                warning.classList.add('active');
-                advertencia.innerHTML = 'Codigo incorrecto...';
-            }
-            
-        }else{
-            warning.classList.add('active');
-            advertencia.innerHTML = 'Ingresa un codigo para continuar...';
-        }
-    });
   
-    initparty.addEventListener('click', () => {
-      codigodelhoster = 0;
-         enviarDatos();
-         
-    });
-  </script>
+  <script src="{% static 'js/envioformulario.js'%}"></script>
+<script src="{% static 'js/formularioinicial.js'%}"></script>
 </body>
 </html>
