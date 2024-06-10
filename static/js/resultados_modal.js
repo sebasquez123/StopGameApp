@@ -11,10 +11,6 @@ document.addEventListener('DOMContentLoaded', function(){
         window.location.href = "/entrar";
         sessionStorage.clear();
     });
-    //cuando se preciona el boton de volver a jugar, se recarga la pagina
-    document.getElementById('againbtn').addEventListener('click', function () {
-        location.reload();
-    });
 });
 //la funcion desplegarPuntaje, se encarga de desplegar el modal de final de la partida y de llamar las variables
 //guardadas en el sessionStorage.

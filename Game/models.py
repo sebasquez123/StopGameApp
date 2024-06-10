@@ -79,7 +79,14 @@ class esparcimiento(models.Model):
     nick3 = models.CharField(max_length=20, default='',blank=True)
     nick4 = models.CharField(max_length=20, default='',blank=True)
     nick5 = models.CharField(max_length=20, default='',blank=True)
+    nickstate1 = models.BooleanField(default=False,blank=True)
+    nickstate2 = models.BooleanField(default=False,blank=True)
+    nickstate3 = models.BooleanField(default=False,blank=True)
+    nickstate4 = models.BooleanField(default=False,blank=True)
+    nickstate5 = models.BooleanField(default=False,blank=True)
     dificultad = models.CharField(max_length=20, default='',blank=True)
+    play = models.BooleanField(default=False,blank=True)
+    inicio = models.BooleanField(default=False,blank=True)
     
     def __str__(self):
         return  str(self.codigo)

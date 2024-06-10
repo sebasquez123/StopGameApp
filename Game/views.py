@@ -8,9 +8,6 @@ from datetime import datetime
 from unidecode import unidecode
 
 
-# espacioEnServidor = False
-# codigo_de_host = 0
-# codigo_de_partida = 0
 tiempo_inicial = 0
 tiempo_final = 0   
 tiempo_1=0
@@ -73,20 +70,20 @@ def login(request):
         try:
             nick =  str(limpieza_de_datos.nickname(user_name))
             dificult =  limpieza_de_datos.dificultad(dificultad)
-            print (nick, dificult,' datos proporcionados correctamente')
+            print (nick, dificult,'datos proporcionados correctamente')
             
             #asignamos el codigo de host a la tabla de servidor e ingresamos los usuarios que vienen con codigo 
             
             espacioEnServidor = asignar_codigo_a_servidor(codigo_de_host,codigo_de_partida,nick,dificult,espacioEnServidor)
-            codigo_existe = buscar_registrar_partida(codigo_de_host,codigo_de_partida,nick,dificult,codigo_existe)
+            codigo_existe = buscar_registrar_partida(codigo_de_host,codigo_de_partida,nick,codigo_existe)
             
             # son alternativos, si uno es 0, el otro es diferente de 0
-            print(codigo_de_host) 
-            print(codigo_de_partida)
+            print('codigo de anfitrion: ',codigo_de_host) 
+            print('codigo de invitado: ',codigo_de_partida)
             
-            print(servidores) #visualizacion del servidor total
-            print(espacioEnServidor) #hay espacio en el servidor? si y solo si se hostea la partida
-            print(codigo_existe) #si existe el codigo en el servidor? si y solo si se une a una partida 
+            print('todo el servidor: ',servidores) #visualizacion del servidor total
+            print('hay espacio para un nuevo host?',espacioEnServidor) #hay espacio en el servidor? si y solo si se hostea la partida
+            print('codigo existe? ',codigo_existe) #si existe el codigo en el servidor? si y solo si se une a una partida 
             
             #una vez se tienen los datos limpios, se procede a verificar si el usuario ya existe por medio de un
             #for loop que recorre los usuarios existentes y retorna un booleano
@@ -106,7 +103,9 @@ def login(request):
                 print('usuario ya existe')
                 print(codigo_de_host)
                 print(codigo_de_partida)
-                gamer.objects.filter(nickname__username=nick).update(dificult=dificult) 
+                gamer.objects.filter(nickname__username=nick).update(dificult=dificult)
+                if  codigo_existe:dificult=visitante(codigo_de_partida,nick)
+                else:pass
                 mensaje = {'redireccion':'/jugar','dificultad':dificult,'nick':nick,'espacio_host':espacioEnServidor,'codigo_host':codigo_de_host,'espacio_sesion':codigo_existe,'codigo_sesion':codigo_de_partida}
                 return JsonResponse(mensaje)
             else:
@@ -119,11 +118,16 @@ def login(request):
                 update_user.save()   
                 update_jugador = gamer(nickname=update_user, dificult=dificult)
                 update_jugador.save()
+                if  codigo_existe: dificult=visitante(codigo_de_partida,nick)
+                else:pass    
                 print(codigo_de_host)
                 print(codigo_de_partida)
                 mensaje = {'redireccion':'/jugar','dificultad':dificult,'nick':nick,'espacio_host':espacioEnServidor,'codigo_host':codigo_de_host,'espacio_sesion':codigo_existe,'codigo_sesion':codigo_de_partida}                
                 print('usuario creado exitosamente')
                 return JsonResponse(mensaje)
+                
+            
+                
                       
         except  ValueError as e:
             nick =''
@@ -138,10 +142,22 @@ def login(request):
     return render(request, 'JustGame/login.html', context)
 
 
-
+    
+    
+def visitante(codigo_de_partida,nick):
+    codigos = esparcimiento.objects.all()
+    for partida in codigos:
+        if partida.codigo == int(codigo_de_partida):
+            gamer.objects.filter(nickname__username=nick).update(dificult=partida.dificultad)
+            print("SE CAMBIO LA DIFICULTAD CON EXITO") 
+            return partida.dificultad
+        else:
+            dif = ''
+    
+        
+    
 def asignar_codigo_a_servidor(codigo_de_host,codigo_de_partida,nick,dificult,espacioEnServidor):
     servidores = esparcimiento.objects.all()
-
     if codigo_de_host != 0 and codigo_de_partida == 0: 
         for servidor in servidores:
             if servidor.codigo == 0:
@@ -157,23 +173,24 @@ def asignar_codigo_a_servidor(codigo_de_host,codigo_de_partida,nick,dificult,esp
                 espacioEnServidor = False         
     else:
         espacioEnServidor = False 
+        print(" no esta recibiendo codigo de host")
     
     return espacioEnServidor
 
     
 #cada vez que haya un codigo de partida, se revisara la cantidad de nicks que hay en el atributo de la clase con codigo
 #xxxxxx, si hay un espacio disponible, en ese espacio se almacena el nick y se prioriza la dificultad del host.
-def buscar_registrar_partida(codigo_de_host,codigo_de_partida,nick,dificult,codigo_existe):
+def buscar_registrar_partida(codigo_de_host,codigo_de_partida,nick,codigo_existe):
     servidores = esparcimiento.objects.all()
+
+    
     codigo_de_partida = int(codigo_de_partida)
     if codigo_de_partida != 0 and codigo_de_host == 0: 
         for servidor in servidores:
             if servidor.codigo == codigo_de_partida:
                 codigo_existe = True
-                print ("codigo Si existe en el servidor")
-                print(servidor)
+                print ('codigo existe dentro del servidor')
                 break
-                
             else:
                 codigo_existe = False
                 print ("codigo no existe dentro del servidor")
@@ -181,6 +198,21 @@ def buscar_registrar_partida(codigo_de_host,codigo_de_partida,nick,dificult,codi
         codigo_existe = False
         print(" no esta recibiendo codigo de partida")
         
+    if codigo_existe:   
+        for i in range(1,6):
+            empty_space = getattr(servidor,f'nick{i}')
+            if empty_space == '':
+                setattr(servidor,f'nick{i}',nick)
+                servidor.save() 
+                print('fnickn:',f'nick{i}', 'nick:',nick)
+                codigo_existe = True
+                print ("Si hay espacio en el servidor")
+                break
+            else:
+                codigo_existe = False
+                print ("No hay espacio en el servidor",empty_space)
+                
+                
     return codigo_existe
         
 
@@ -342,9 +374,52 @@ def definir_juego ():
     
     
 def get_data(request):
+    jugadores = esparcimiento.objects.all()
+    lista_de_jugadores = []
+    lista_de_estados = []
+    #buscar el codigo en el servidor, y sustraer solo sus jugadores en una lista para mostrarlos
+    #al mismo tiempo, consulta el estado de cada jugador en la misma tabla y envia otra lista con los estados
+    nick = request.GET.get('nombre')
+    codigo_asociado = request.GET.get('codigo_asociado')
+    estado_de_inicio = request.GET.get('estado_de_inicio')
+    play = request.GET.get('play')
+    quitarModalDeInicio = request.GET.get('quitarModalDeInicio')
+    espacio_host = request.GET.get('espacio_host')
     
-    data = list(esparcimiento.objects.values())
-    return JsonResponse(data,safe=False)
+    play = True if play == 'true' else False
+    quitarModalDeInicio = True if quitarModalDeInicio == 'true' else False
+    estado_de_inicio = True if estado_de_inicio == 'true' else False
+    
+    for jugador in jugadores:
+        if jugador.codigo == int(codigo_asociado):
+            print('obteniendo jugadores registrados')
+            if espacio_host == 'true':subir_datos_de_control(play,quitarModalDeInicio,jugador)
+            else:pass
+            objeto_de_control = {'newplay':getattr(jugador,'play'),'inicio':getattr(jugador,'inicio')}
+            for i in range (1,6):   
+                if getattr(jugador,f'nick{i}') != '':
+                    if(getattr(jugador,f'nick{i}')==nick):
+                       setattr(jugador,f'nickstate{i}',estado_de_inicio)
+                       jugador.save() 
+                    lista_de_estados.append(getattr(jugador,f'nickstate{i}'))
+                    lista_de_jugadores.append(getattr(jugador,f'nick{i}'))
+                    print('nick:'f'nick{i}')
+                
+        else:
+            pass
+        
+    
+    # print('jugadores:',lista_de_jugadores)  
+    # print('estado:',lista_de_estados)         
+    # print('nick:',nick,'codigo:',codigo_asociado,'estado:',estado_de_inicio,'objetodecontrol:',objeto_de_control)
+    print('objetodecontrol:',objeto_de_control)
+    mensaje = {'jugadores_list':lista_de_jugadores,'estados_list':lista_de_estados,'newplay':objeto_de_control['newplay'],'inicio':objeto_de_control['inicio']}
+
+    return JsonResponse(mensaje, safe=False)
         
   
+def subir_datos_de_control(play,quitarModalDeInicio,jugador):
     
+    setattr(jugador,'play',play)
+    setattr(jugador,'inicio',quitarModalDeInicio)
+    jugador.save()

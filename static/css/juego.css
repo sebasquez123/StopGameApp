@@ -222,7 +222,7 @@ font-family:monospace !important;
        justify-items:center;
        overflow-x: auto !important;
        scrollbar-width: none !important;
-       height: 250px;
+       height: 100%;
    }
    .contenido-inf{
        display: grid;
@@ -349,4 +349,19 @@ font-family:monospace !important;
 
 .trhover:hover{
   background-color: #00000042;
+}
+
+.modal-footer{
+    transition: all 1s ease-in-out;
+}
+.modal-footer.active{
+background: #51ff00 !important;
+}
+#listobtn{
+    transition: all 1s ease-in-out;
+}
+#listobtn.active{
+background: #ffffff !important;
+color: #000000 !important;
+border: transparent !important; 
 }

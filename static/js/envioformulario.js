@@ -70,12 +70,12 @@ function enviarDatos()
 
 function excepciones(url,espacio_host,espacio_sesion,codigo_host,codigo_sesion)
 {
-    if (codigo_host == 0 && espacio_sesion == false) //ingresando por codigo de sesion
+    if (codigo_host == 0 && codigo_sesion != 0 &&espacio_sesion == false) //ingresando por codigo de sesion
     {
         warning.classList.add('active');
-        advertencia.innerHTML = 'No existe este codigo de sesión, intenta con otro codigo...';
+        advertencia.innerHTML = 'No existe este codigo o no hay espacio dentro de la sesion... intenta con otro!';
     }
-    else if (codigo_sesion == 0 && espacio_host == false) // hosteando el juego
+    else if (codigo_sesion == 0 && codigo_host!= 0 && espacio_host == false) // hosteando el juego
     {
         warning.classList.add('active');
         advertencia.innerHTML = 'Todos los servidores estan ocupados... intenta mas tarde...';

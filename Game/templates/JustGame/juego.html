@@ -10,14 +10,13 @@
         <meta name="description" content="Un juego de cultura y velocidad mental muy conocido" />
         <meta name="author" content="Sebastian vasquez" />
         <title>Stop game</title>
-        {% comment %} <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" /> {% endcomment %}
+        <link rel="icon" type="image/x-icon" href="{% static 'images/STOPLOG.jpg'%}" />
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="{% static 'css/ranking.css'%}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/juego.css'%}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/playbutton.css'%}">
-        {% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/modal_salida.css'%}"> {% endcomment %}
     </head>
     
     <body>
@@ -139,20 +138,15 @@
                             <div style="display:flex; justify-content:center;margin-top:50px;" ><img class="versus instructions" src="{% static 'images/vs.png'%}" alt="icono versus"></div>
                           </div>
                           <div class="ganaste_modal_seccion">
-                                <ul>
-                                  <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li> 
-                                  {% comment %} <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li> 
-                                  <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li> 
-                                  <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li> 
-                                  <li><i class="fa fa-check-circle" style="color:green;"></i>{{sebas}}</li>  {% endcomment %}
+                                <ul id="players_list">
                                 </ul>
                           </div>
                         </div>
                     </div>    
                 </div>
                 <div class="modal-footer">
-                  <button id="listobtn" type="button" class="btn btn-success" data-bs-dismiss="modal">Estoy listo</button>
-                  <button id="comenzarbtn" type="button" class="btn btn-light" data-bs-dismiss="modal">Comenzar</button>
+                  <button id="listobtn" type="button" class="btn btn-success" >Estoy listo</button>
+                  <button id="comenzarbtn" type="button" class="btn btn-light" >Comenzar</button>
                 </div>
               </div>
             </div>
@@ -230,7 +224,6 @@
                     </div>    
                 </div>
                 <div class="modal-footer">
-                  <button id="againbtn" type="button" class="btn btn-warning" data-bs-dismiss="modal">Jugar otra vez</button>
                   <button id="leftbtn" type="button" class="btn btn-light" data-bs-dismiss="modal">Salir</button>
                 </div>
               </div>
@@ -323,13 +316,126 @@
   </div>
 
 
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <script src="{% static 'js/config_inicial_juego.js'%}"></script>
+  <script src="{% static 'js/peticion_modal_inf.js'%}"></script>
   <script src="{% static 'js/iniciodeljuego.js'%}"></script>
   <script src="{% static 'js/cronometrar.js'%}"></script>
   <script src="{% static 'js/resultados_modal.js'%}"></script>
   <script src="{% static 'js/tramas_de_datos.js'%}"></script>
+  
 
+
+  <script>
+    {% comment %} infibtn.click(); 
+    
+      var espacio_host = sessionStorage.getItem("espacio_host");
+      var codigo_host = sessionStorage.getItem("codigo_host");
+      var espacio_sesion = sessionStorage.getItem("espacio_sesion"); 
+      var codigo_sesion = sessionStorage.getItem("codigo_sesion");
+      var Estado_De_Juego_Inicial = false;
+      var codigo_asociado = '';
+
+
+      if (espacio_host == 'false' && espacio_sesion == 'false'){
+          onlinemode.style.display = "none";
+          listobtn.style.display = "none";
+      }
+      else if (espacio_host == 'true' && espacio_sesion == 'false')
+      {
+          onlinemode.style.display = "block";
+          document.querySelector('#onlinemode h3').innerHTML = "CODIGO: " + codigo_host;
+      }
+      else if (espacio_host == 'false' && espacio_sesion == 'true')
+      {
+          onlinemode.style.display = "block";
+          comenzarbtn.style.display = "none";
+          document.querySelector('#onlinemode h3').innerHTML = "CODIGO: " + codigo_sesion;
+      }
+      else 
+      {
+          print("error al procesar los codigos...")
+      }
+      
+
+
+                // LOGICA PARA GUARDAR EL ESTADO INICIAL DEL JUGADOR.
+      codigo_asociado = codigo_sesion !== '0' ? codigo_sesion : codigo_host;
+
+
+      $('#listobtn').click(function(event){
+        listobtn.textContent === "Estoy listo" ? listobtn.textContent = "Ya no estoy listo" : listobtn.textContent = "Estoy listo";
+        $('#listobtn').toggleClass('active');
+        $('.modal-footer').toggleClass('active');
+        Estado_De_Juego_Inicial = !Estado_De_Juego_Inicial;
+       
+      })
+
+
+
+  $(document).ready(function(){
+
+        function SendAndGetStates(){
+          $.ajax({
+            url: '{% url "get_data" %}',
+            type: 'GET',
+            data: {
+              'nombre': sessionStorage.getItem('nick'),
+              'estado_de_inicio': Estado_De_Juego_Inicial,
+              'codigo_asociado': codigo_asociado,
+            },     
+            success: function(response){
+              mostrarDatos(response.jugadores_list,response.estados_list);
+              starthost(response.estados_list);
+            },
+            error: function(error){
+              console.log('error al obtener los datos',error);
+            }
+          });
+        }
+        
+        
+        setInterval(function(){
+          if($('#informacion').is(':visible')){
+            SendAndGetStates();
+          }
+        },1000)
+    
+});
+      
+function mostrarDatos(jugadores_list,estados_list){
+
+
+var listo = '';
+$('#players_list').empty();
+
+for (var i = 0; i < jugadores_list.length; i++){
+
+estados_list[i] === true ? listo = '#73ff00' : listo = 'white';
+
+const newItem = `<li><i class="fa fa-check-circle" style="color:${listo}"></i>${jugadores_list[i]}</li>`;
+
+$('#players_list').append(newItem);
+
+}
+}
+
+function starthost(estados_list){
+  
+  if(estados_list.every(function(bool){return bool === true})){
+    console.log('Todos los jugadores estan listos');
+    comenzarbtn.disabled = false;
+  }
+  else
+  {
+    console.log('Aun hay jugadores que no estan listos');
+    comenzarbtn.disabled = true;
+  }
+  
+} {% endcomment %}
+
+  </script>
 </html>
 

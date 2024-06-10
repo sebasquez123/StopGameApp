@@ -1,90 +1,26 @@
+// A PARTIR DE AQUI, SE INICIALIZA LA LOGICA DESPUES DEL MODAL DE INFORMACION
+const stoptext = document.getElementById("stopplay");
+var stopbtn= document.getElementById("stop");
+const contenedor = document.getElementById("contenedorprincipal");
+const celdas = document.querySelectorAll(".celdas td");
+var fila_letra = "";
+var contador = 0;    
+var newplay = false;    
+var play = false;   
+stoptext.innerHTML="PLAY";
+stopbtn.style.opacity="1";
+telon.style.display="none";
+loading.style.opacity = "1";
 
-                document.getElementById('infibtn').click();
-                
-                var espacio_host = sessionStorage.getItem("espacio_host");
-                var codigo_host = sessionStorage.getItem("codigo_host");
-                var espacio_sesion = sessionStorage.getItem("espacio_sesion"); 
-                var codigo_sesion = sessionStorage.getItem("codigo_sesion");
-                
-                
-                console.log(typeof(espacio_host), codigo_host, espacio_sesion, typeof(codigo_sesion));
-                if (espacio_host == 'false' && espacio_sesion == 'false'){
-                    onlinemode.style.display = "none";
-                    listobtn.style.display = "none";
-                }
-                else if (espacio_host == 'true' && espacio_sesion == 'false')
-                {
-                    onlinemode.style.display = "block";
-                    document.querySelector('#onlinemode h3').innerHTML = "CODIGO: " + codigo_host;
-                }
-                else if (espacio_host == 'false' && espacio_sesion == 'true')
-                {
-                    onlinemode.style.display = "block";
-                    document.querySelector('#onlinemode h3').innerHTML = "CODIGO: " + codigo_sesion;
-                }
-                else 
-                {
-                    print("error al procesar los codigos...")
-                    }
-                
-           //se recuperan los datos guardados en el sessionStorage para mostrarlos en la vista del juego
-           //se muestra el nombre, la dificultad y el fondo seleccionado
-                const nombretext= document.getElementById("nombre");
-                const FondoDelCuerpo = document.querySelector("body");
-                var identidad =sessionStorage.getItem("id");
-                var nombre = sessionStorage.getItem("nick");
-                var dificultad = sessionStorage.getItem("dificultad");
-                var urlf = sessionStorage.getItem("urlf");
-                
-                if(urlf == "f1"){urlf = "../../../static/images/fondo0.jpg"; }
-                else if(urlf == "f2"){urlf = "../../../static/images/fondo1.jpg";}
-                else if (urlf == "f3"){urlf = "../../../static/images/fondo2.jpg";}
-                else if(urlf == "f4"){urlf = "../../../static/images/fondo3.jpg";}
-                else if (urlf == "f5"){urlf = "../../../static/images/fondo4.jpg";}
-                else{urlf = "../../../static/images/fondo5.jpg";}
+//LOGICA PARA ALTERNAR LA VARIABLE DE PLAY SOLO POR EL ANFITRION
+stopbtn.addEventListener("click", function () {
+    if (espacio_sesion == 'false') {play = !play;}
+});
+//SOLO SE EMPIEZA EL JUEGO SI LA VARIABLE ES MANIPULADA POR EL ANFITRION
+if(sessionStorage.getItem('newplay') == "true"){console.log("se inicio el juego");}
 
-                FondoDelCuerpo.style.backgroundImage = "url("+urlf+")";
-                nombretext.innerHTML = nombre.toUpperCase() + " - " + dificultad.toUpperCase();
+// Empezar_A_Jugar(play);
 
-
-
-
-            //cuando el usuario preciona el boton de jugar, se realizan un par de efectos visuales y se 
-            //alterna la variable que determina el comienzo y el final de la partida para poder determinar cuando 
-            //cronometrar
-            const stoptext = document.getElementById("stopplay");
-            var stopbtn= document.getElementById("stop");
-            const contenedor = document.getElementById("contenedorprincipal");
-            const celdas = document.querySelectorAll(".celdas td");
-            const hamster = document.getElementById('hamster');
-            const comenzar = document.getElementById('comenzarbtn');
-            var play = false;
-            var fila_letra = "";
-            var contador = 0;           
-            
-
-
-            for (let j = 1; j < 4; j++) {
-                document.querySelectorAll('#fila'+j+' td').forEach(element => { element.classList.add('locked'); });
-                 document.querySelectorAll('#fila'+j+' input').forEach(element => { element.disabled = true; });
-            }
-            
-          
-            
-            stoptext.innerHTML="PLAY";
-            stopbtn.style.opacity="1";
-            telon.style.display="none";
-            loading.style.opacity = "1";
-            
-
-            
-            stopbtn.addEventListener("click", function(){
-                // stoptext.innerHTML = stoptext.innerHTML === "PLAY" ? "STOP" : "PLAY";
-                
-
-            play =!play;
-            Empezar_A_Jugar(play);  
-            });
 
             function Empezar_A_Jugar(condicion)
             {
@@ -178,8 +114,8 @@
             function random() {     
                 let dificultad = sessionStorage.getItem("dificultad");
                 let VECTOR = [];
-                if (dificultad == "facil") { VECTOR.push("S","A","C");}
-                if (dificultad == "medio") { VECTOR.push("E","F","G","I","L","O","U","V");}
+                if (dificultad == "facil") { VECTOR.push("A","B","C","D","J","M","N","P","R","S");}
+                if (dificultad == "medio") { VECTOR.push("E","F","G","I","L","O","U","V","T");}
                 if (dificultad == "avanzado") { VECTOR.push("H","K","Q","W","X","Y","Z");}
                 ubi = Math.floor(Math.random()*VECTOR.length);
                 return VECTOR[ubi];  
