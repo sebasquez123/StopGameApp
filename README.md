@@ -1,6 +1,6 @@
 <div style="align: justify;">
 <strong>Un aplicativo de entretenimiento diseñado para revivir el tradicional juego que conocemos como "STOP". Este modulo tiene como finalidad registrar un jugador que se guardara
-en base de datos SQlite3 y se calculara un puntaje de habilidad al terminar el juego. Este modelo posee un modelo de machine learning random forest de nivel suficiente para resolver el problema de clasificacion al validar las palabras en el servidor con ayuda de librerias como Scikitlearn, numpy y pandas.
+en base de datos SQlite3 y se calculara un puntaje de habilidad al terminar el juego. Este modelo posee un modelo de machine learning random forest de nivel suficiente para resolver el problema de clasificacion al validar las palabras en el servidor con ayuda de librerias como <em>SCIKITLEARN, NUMPY y PANDAS</em>.
 
 ![](https://github.com/sebasquez123/StopGameApp/blob/main/figures/Figura-inicio.png)
 
